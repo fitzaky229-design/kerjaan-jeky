@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kerjaan Jeky</title>
+<meta name="theme-color" content="#2E7D32">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--h:#2E7D32;--h2:#1B5E20;--h3:#E8F5E9;--o:#E65100;--o2:#FFF3E0;--m:#C62828;--m2:#FFEBEE;--b:#1565C0;--b2:#E3F2FD;--t:#1F2937;--t2:#6B7280;--g:#E5E7EB;--bg:#F4F6F4;--k:#fff}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--t);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+a{color:var(--h)}
+.tautan{color:var(--h);text-decoration:underline;cursor:pointer}
+header.atas{position:sticky;top:0;z-index:20;background:var(--h);color:#fff;display:flex;align-items:center;gap:6px;padding:8px 10px;min-height:54px;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+header .judul{flex:1;font-weight:600;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn-ikon{background:none;border:0;color:inherit;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;cursor:pointer;flex:none;padding:0}
+.btn-ikon svg{width:22px;height:22px}
+.status-sinkron{font:inherit;font-size:12px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.18);border:0;color:#fff;white-space:nowrap;cursor:pointer;flex:none}
+.status-sinkron.tunggu{background:#FFE0B2;color:#BF360C}
+.status-sinkron.offline{background:#FFB74D;color:#3E2723}
+main#isi{padding:14px 14px 100px;max-width:760px;margin:0 auto}
+nav.bawah{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--g);display:flex;z-index:20;padding-bottom:env(safe-area-inset-bottom)}
+nav.bawah button{flex:1;background:none;border:0;padding:8px 0 6px;font:inherit;font-size:11px;color:var(--t2);display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
+nav.bawah button.aktif{color:var(--h);font-weight:700}
+nav.bawah svg{width:23px;height:23px}
+.kartu{background:var(--k);border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.05);border:1px solid var(--g)}
+.judul-kartu{font-weight:700;margin-bottom:8px}
+h2.bagian{font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--t2);margin:20px 2px 8px;font-weight:700}
+.h1{font-size:20px;font-weight:700;line-height:1.25}
+.h2{font-size:17px;font-weight:700;margin-bottom:6px}
+.sub{font-weight:700;color:var(--h2);margin:14px 0 8px;padding-top:10px;border-top:1px dashed var(--g)}
+.muted{color:var(--t2);font-size:13px}
+.row-between{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.row-between h2.bagian{margin-bottom:8px}
+.sapa{margin:2px 2px 14px}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+.stat{background:#fff;border:1px solid var(--g);border-radius:12px;padding:10px 10px 8px;min-width:0}
+.stat[onclick]{cursor:pointer}
+.stat .n{font-size:22px;font-weight:800;line-height:1.1}
+.stat .l{font-size:12px;color:var(--t2);margin-top:2px}
+.stat.merah{background:var(--m2);border-color:#FFCDD2;color:var(--m)}
+.stat.oranye{background:var(--o2);border-color:#FFE0B2;color:var(--o)}
+.stat.biru{background:var(--b2);border-color:#BBDEFB;color:var(--b)}
+.stat.merah .l,.stat.oranye .l,.stat.biru .l{color:inherit;opacity:.85}
+.item{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid var(--g);border-left:4px solid #CFD8DC;border-radius:12px;padding:11px 12px;margin-bottom:8px;cursor:pointer}
+.item.merah{border-left-color:var(--m)}.item.oranye{border-left-color:var(--o)}.item.hijau{border-left-color:var(--h)}.item.biru{border-left-color:var(--b)}
+.item .utama{flex:1;min-width:0}
+.item .j{font-weight:700;overflow-wrap:anywhere}
+.item .s{font-size:13px;color:var(--t2);overflow-wrap:anywhere}
+.badge{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:#ECEFF1;color:#455A64;white-space:nowrap;vertical-align:middle}
+.badge.hijau{background:var(--h3);color:var(--h2)}.badge.merah{background:var(--m2);color:var(--m)}.badge.oranye{background:var(--o2);color:var(--o)}.badge.biru{background:var(--b2);color:var(--b)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:10px;padding:11px 16px;font:inherit;font-size:15px;font-weight:700;background:var(--h);color:#fff;cursor:pointer;text-decoration:none;line-height:1.2}
+.btn.dua{background:#fff;color:var(--h2);border:1px solid #A5D6A7}
+.btn.bahaya{background:#fff;color:var(--m);border:1px solid #EF9A9A}
+.btn.merah{background:var(--m);color:#fff}
+.btn.kecil{padding:7px 12px;font-size:13.5px;border-radius:8px}
+.btn.penuh{width:100%}
+.btn:disabled{opacity:.55;cursor:default}
+.baris-btn{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.fab{position:fixed;right:18px;bottom:80px;width:58px;height:58px;border-radius:50%;background:var(--h);color:#fff;border:0;font-size:30px;line-height:1;box-shadow:0 4px 14px rgba(0,0,0,.28);z-index:15;cursor:pointer}
+label.f,div.f{display:block;margin-bottom:12px}
+label.f>span,.lbl{display:block;font-size:13px;font-weight:700;color:#374151;margin-bottom:4px}
+.hint{font-size:12px;color:var(--t2);margin-top:3px}
+input,select,textarea{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1px solid #CBD5E1;border-radius:10px;background:#fff;color:var(--t);min-height:44px}
+input[readonly]{background:#F3F4F6;color:#4B5563}
+input:focus,select:focus,textarea:focus{outline:2px solid #A5D6A7;border-color:var(--h)}
+textarea{min-height:84px;resize:vertical}
+input[type=checkbox]{width:20px;height:20px;min-height:0;vertical-align:middle;margin:0 8px 0 0;accent-color:var(--h)}
+label.cek{display:flex;align-items:center;margin-bottom:12px;font-size:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+dl.info{display:grid;grid-template-columns:minmax(90px,auto) 1fr;gap:6px 12px;font-size:14px;margin:10px 0 0}
+dl.info dt{color:var(--t2)}
+dl.info dd{margin:0;font-weight:600;overflow-wrap:anywhere}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:8px;scrollbar-width:none}
+.chip{border:1px solid #CBD5E1;background:#fff;border-radius:999px;padding:7px 14px;font:inherit;font-size:13.5px;white-space:nowrap;cursor:pointer;color:var(--t)}
+.chip.aktif{background:var(--h);color:#fff;border-color:var(--h)}
+.tabel-wrap{overflow-x:auto;padding:0}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--g);text-align:left;white-space:nowrap}
+th{background:#F9FAFB;font-weight:700;color:#374151}
+tr:last-child td{border-bottom:0}
+.num{text-align:right}
+td.merah{color:var(--m);font-weight:700}td.hijau{color:var(--h2);font-weight:700}
+.toast-wrap{position:fixed;left:12px;right:12px;bottom:86px;z-index:70;display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none}
+.toast{background:#263238;color:#fff;padding:10px 14px;border-radius:10px;font-size:14px;max-width:520px;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:auto}
+.toast.error{background:var(--m)}.toast.warn{background:#BF360C}.toast.ok{background:var(--h2)}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:60;display:grid;place-items:center;padding:16px}
+.modal{background:#fff;border-radius:14px;padding:18px;max-width:440px;width:100%;max-height:90vh;overflow:auto}
+.modal img{max-width:100%;border-radius:8px;display:block}
+.foto-grid{display:flex;gap:10px;flex-wrap:wrap}
+.foto-box{position:relative}
+img.foto{width:96px;height:96px;border-radius:10px;object-fit:cover;background:#ECEFF1;display:block;cursor:pointer}
+.foto-box .x{position:absolute;top:-7px;right:-7px;width:26px;height:26px;border-radius:50%;border:0;background:var(--m);color:#fff;font-size:13px;cursor:pointer;line-height:26px;padding:0}
+.progress{height:10px;background:#ECEFF1;border-radius:99px;overflow:hidden;margin:8px 0}
+.progress>div{height:100%;background:var(--h);border-radius:99px}
+.progress>div.oranye{background:var(--o)}
+.kosong{text-align:center;color:var(--t2);padding:22px 10px;font-size:14px}
+.pending-banner{background:var(--o2);color:#BF360C;border:1px solid #FFCC80;border-radius:10px;padding:10px 12px;font-size:13.5px;margin-bottom:12px}
+.gps{border:1px dashed #B0BEC5;border-radius:10px;padding:10px;margin-bottom:12px;background:#FAFAFA}
+.tahap{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--g);cursor:pointer}
+.tahap:last-child{border-bottom:0}
+.tahap .dot{width:14px;height:14px;border-radius:50%;margin-top:4px;flex:none;background:#CFD8DC}
+.dot.hijau{background:var(--h)}.dot.merah{background:var(--m)}.dot.oranye{background:var(--o)}
+.tahap .utama{flex:1}
+.editor-baris{display:grid;grid-template-columns:1fr 84px 38px;gap:6px;margin-bottom:6px;align-items:center}
+.editor-field{border:1px solid var(--g);border-radius:10px;padding:8px;margin-bottom:8px}
+.editor-field .atas{display:grid;grid-template-columns:1fr 110px 38px;gap:6px;margin-bottom:6px;align-items:center}
+.btn-hapus{width:38px;height:38px;border:1px solid #EF9A9A;color:var(--m);background:#fff;border-radius:8px;cursor:pointer;font-size:15px;padding:0}
+.hitung{background:var(--h3);border-radius:10px;padding:10px 12px;font-size:14px;margin-bottom:12px}
+.login{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(160deg,#1B5E20,#2E7D32 60%,#43A047)}
+.login .kotak{background:#fff;border-radius:16px;padding:26px 22px;width:100%;max-width:370px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.login h1{margin:6px 0 2px;font-size:22px;color:var(--h2)}
+.login .logo{width:56px;height:56px;border-radius:14px;background:var(--h3);display:grid;place-items:center;font-size:30px}
+.login .pesan{background:var(--o2);color:#BF360C;padding:10px;border-radius:8px;font-size:13.5px;margin:12px 0}
+.login .salah{color:var(--m);font-size:13.5px;margin-top:10px;min-height:1em}
+.memuat{min-height:100vh;display:grid;place-items:center;color:var(--t2)}
+@media (min-width:600px){.stat .n{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="memuat">Memuat aplikasi…</div>
+<script>
+'use strict';
+/* ====================== UTILITAS ====================== */
+const TABEL = ['Petani', 'Komoditas', 'Tanam', 'Inspeksi', 'Taksasi', 'Panen', 'Foto'];
+const BULAN = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+const BULAN_P = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+const HARI = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+
+function $(s, el) { return (el || document).querySelector(s); }
+function $$(s, el) { return Array.from((el || document).querySelectorAll(s)); }
+function esc(s) { return String(s === null || s === undefined ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function uuid() {
+  if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); });
+}
+function on(fn, ...args) { return 'onclick="' + esc(fn + '(' + args.map(a => JSON.stringify(a === undefined ? null : a)).join(',') + ')') + '"'; }
+function onSubmit(fn, ...args) { return 'onsubmit="' + esc(fn + '(event' + args.map(a => ',' + JSON.stringify(a === undefined ? null : a)).join('') + ')') + '"'; }
+function pad(n) { return String(n).padStart(2, '0'); }
+function hariIni() { const d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+function keUTC(s) { const p = String(s).slice(0, 10).split('-').map(Number); return Date.UTC(p[0], p[1] - 1, p[2]); }
+function tambahHari(s, n) { return s ? new Date(keUTC(s) + Number(n || 0) * 86400000).toISOString().slice(0, 10) : ''; }
+function selisih(a, b) { return Math.round((keUTC(b) - keUTC(a)) / 86400000); }
+function fmtTgl(s) { if (!s) return '-'; const p = String(s).slice(0, 10).split('-').map(Number); if (!p[0] || !p[1]) return '-'; return p[2] + ' ' + BULAN[p[1] - 1] + ' ' + p[0]; }
+function fmtTglPanjang(s) { const p = s.split('-').map(Number); const dt = new Date(p[0], p[1] - 1, p[2]); return HARI[dt.getDay()] + ', ' + p[2] + ' ' + BULAN_P[p[1] - 1] + ' ' + p[0]; }
+function fmtAngka(n, dec) { if (n === null || n === undefined || n === '' || isNaN(n)) return '-'; return Number(n).toLocaleString('id-ID', { maximumFractionDigits: dec === undefined ? 2 : dec }); }
+function fmtKoord(n) { return n === null || n === undefined || n === '' ? '-' : Number(n).toFixed(6); }
+function jumlah(arr) { return arr.reduce((a, b) => a + (Number(b) || 0), 0); }
+function angka(v) { if (v === '' || v === null || v === undefined) return null; const n = Number(String(v).replace(',', '.')); return isNaN(n) ? null : n; }
+function labelSelisih(n) { if (n < 0) return 'Terlewat ' + (-n) + ' hari'; if (n === 0) return 'Hari ini'; if (n === 1) return 'Besok'; return 'H-' + n; }
+function warnaSelisih(n, jendela) { return n < 0 ? 'merah' : (n <= jendela ? 'oranye' : ''); }
+function urutTglTurun(a, b) { return String(b.tanggal || '').localeCompare(String(a.tanggal || '')); }
+function nextKode(arr, prefix, lebar) {
+  let maks = 0;
+  arr.forEach(o => { const k = String(o.kode || ''); if (k.indexOf(prefix) === 0) { const n = parseInt(k.slice(prefix.length), 10); if (!isNaN(n) && n > maks) maks = n; } });
+  return prefix + String(maks + 1).padStart(lebar || 3, '0');
+}
+function salam() { const h = new Date().getHours(); return h < 11 ? 'pagi' : h < 15 ? 'siang' : h < 18 ? 'sore' : 'malam'; }
+function maps(lat, lng) { return 'https://www.google.com/maps/search/?api=1&query=' + lat + ',' + lng; }
+function nomorWa(hp) { let s = String(hp || '').replace(/\D/g, ''); if (!s) return ''; if (s[0] === '0') s = '62' + s.slice(1); else if (s[0] === '8') s = '62' + s; return s; }
+
+const IK = {
+  kembali: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>',
+  beranda: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>',
+  jadwal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16.5" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>',
+  petani: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.3-6 6.5-6s5.9 2.4 6.5 6"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.3c2 .9 3.2 3 3.5 5.7"/></svg>',
+  laporan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
+  pengaturan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>'
+};
+const NAMA_TAB = { beranda: 'Beranda', jadwal: 'Jadwal', petani: 'Petani', laporan: 'Laporan', pengaturan: 'Pengaturan' };
+
+/* ====================== PENYIMPANAN DI HP ====================== */
+const Simpan = {
+  db: null, mem: { kv: {}, antre: {}, foto: {} },
+  async buka() {
+    try {
+      this.db = await new Promise((res, rej) => {
+        const r = indexedDB.open('aplikasi-fi-benih', 1);
+        r.onupgradeneeded = () => { ['kv', 'antre', 'foto'].forEach(n => { if (!r.result.objectStoreNames.contains(n)) r.result.createObjectStore(n); }); };
+        r.onsuccess = () => res(r.result);
+        r.onerror = () => rej(r.error);
+      });
+    } catch (e) {
+      this.db = null;
+      try { const s = localStorage.getItem('aplikasi-fi-benih'); if (s) this.mem = JSON.parse(s); } catch (e2) { /* abaikan */ }
+    }
+  },
+  _memSimpan() { try { localStorage.setItem('aplikasi-fi-benih', JSON.stringify(this.mem)); } catch (e) { /* penuh */ } },
+  tx(store, mode, fn) {
+    return new Promise((res, rej) => {
+      const t = this.db.transaction(store, mode);
+      const r = fn(t.objectStore(store));
+      t.oncomplete = () => res(r ? r.result : undefined);
+      t.onerror = () => rej(t.error);
+      t.onabort = () => rej(t.error);
+    });
+  },
+  async get(store, key) { if (!this.db) return this.mem[store][key]; return this.tx(store, 'readonly', s => s.get(key)); },
+  async set(store, key, val) { if (!this.db) { this.mem[store][key] = val; this._memSimpan(); return; } return this.tx(store, 'readwrite', s => s.put(val, key)); },
+  async del(store, key) { if (!this.db) { delete this.mem[store][key]; this._memSimpan(); return; } return this.tx(store, 'readwrite', s => s.delete(key)); },
+  async semua(store) { if (!this.db) return Object.values(this.mem[store]); return this.tx(store, 'readonly', s => s.getAll()); }
+};
+
+/* ====================== STATE & DATA ====================== */
+const S = {
+  server: null, token: null, snap: null, antre: [], fotoLokal: {}, online: true, sinkron: false, terakhir: null,
+  stack: [], cache: null, fotoCache: {}, form: null, mulai: false,
+  filter: { jadwalKom: '', lapKom: '', lapTahun: '', cariPetani: '' }
+};
+
+function data() {
+  if (S.cache) return S.cache;
+  const d = {};
+  TABEL.forEach(n => { d[n] = ((S.snap && S.snap[n]) || []).map(o => Object.assign({}, o)); });
+  d.pengaturan = Object.assign({ jendela: 7 }, (S.snap && S.snap.pengaturan) || {});
+  S.antre.forEach(op => {
+    if (op.jenis === 'setting') { d.pengaturan[op.key] = op.value; return; }
+    const arr = d[op.tabel];
+    if (!arr) return;
+    const id = op.jenis === 'hapus' ? op.id : op.data.id;
+    const i = arr.findIndex(x => x.id === id);
+    if (op.jenis === 'hapus') { if (i >= 0) arr.splice(i, 1); return; }
+    if (i >= 0) Object.assign(arr[i], op.data, { _pending: true });
+    else arr.push(Object.assign({}, op.data, { _pending: true }));
+  });
+  const adaFoto = new Set(d.Foto.map(f => f.id));
+  Object.values(S.fotoLokal).forEach(f => {
+    if (!adaFoto.has(f.id) && !f.dihapus) d.Foto.push({ id: f.id, inspeksiId: f.inspeksiId, kodeTanam: f.kodeTanam, fileId: f.fileId || '', lokal: true });
+  });
+  d.by = {};
+  TABEL.forEach(n => { d.by[n] = {}; d[n].forEach(o => { d.by[n][o.id] = o; }); });
+  S.cache = d;
+  return d;
+}
+function jendelaHari(d) { return Math.max(1, parseInt(d.pengaturan.jendela, 10) || 7); }
+function namaPetani(t, d) { const p = d.by.Petani[t.petaniId]; return p ? p.nama : (t.namaPetani || '-'); }
+function namaKom(t, d) { const k = d.by.Komoditas[t.komoditasId]; return k ? k.nama : (t.komoditas || '-'); }
+function koordinat(t, d) {
+  if (t.lat !== null && t.lat !== undefined && t.lat !== '') return [t.lat, t.lng];
+  const p = d.by.Petani[t.petaniId];
+  if (p && p.lat !== null && p.lat !== undefined && p.lat !== '') return [p.lat, p.lng];
+  return null;
+}
+function fotoMenunggu() { return Object.values(S.fotoLokal).filter(f => !f.terkirim && !f.dihapus).length; }
+function jumlahMenunggu() { return S.antre.length + fotoMenunggu(); }
+
+async function catat(op) {
+  op.opId = uuid();
+  op.seq = Date.now() + Math.random();
+  S.antre.push(op);
+  S.cache = null;
+  await Simpan.set('antre', op.opId, op);
+  jadwalSinkron();
+}
+function simpanRec(tabel, rec) { return catat({ jenis: 'upsert', tabel: tabel, data: rec }); }
+function hapusRec(tabel, id) { return catat({ jenis: 'hapus', tabel: tabel, id: id }); }
+async function setSnap(d) { S.snap = d; S.cache = null; await Simpan.set('kv', 'snap', d); }
+
+/* ====================== HITUNGAN ====================== */
+function tahapTanam(t, d) {
+  const k = d.by.Komoditas[t.komoditasId];
+  if (!k || !t.tglTanam) return [];
+  const ins = d.Inspeksi.filter(x => x.tanamId === t.id);
+  const pan = d.Panen.filter(x => x.tanamId === t.id);
+  const out = [];
+  if (t.tglTanam > hariIni()) out.push({ nama: 'Tanam', jenis: 'tanam', tanggal: t.tglTanam, selesai: false });
+  (k.tahap || []).forEach(s => {
+    const ref = ins.filter(x => x.tahap === s.nama).sort(urutTglTurun)[0];
+    out.push({ nama: s.nama, jenis: 'inspeksi', tanggal: tambahHari(t.tglTanam, s.hst), hst: s.hst, selesai: !!ref, ref: ref });
+  });
+  out.push({ nama: 'Panen', jenis: 'panen', tanggal: tambahHari(t.tglTanam, k.hstPanen), hst: k.hstPanen, selesai: pan.length > 0, ref: pan[0] });
+  return out;
+}
+function agenda(d, komId) {
+  const hari = hariIni(), res = [];
+  d.Tanam.filter(t => t.status === 'Aktif' && (!komId || t.komoditasId === komId)).forEach(t => {
+    tahapTanam(t, d).filter(s => !s.selesai).forEach(s => res.push({ t: t, s: s, tanggal: s.tanggal, selisih: selisih(hari, s.tanggal) }));
+  });
+  return res.sort((a, b) => a.tanggal.localeCompare(b.tanggal));
+}
+function berikutnya(t, d) {
+  const s = tahapTanam(t, d).find(x => !x.selesai);
+  return s ? { s: s, selisih: selisih(hariIni(), s.tanggal) } : null;
+}
+function capaian(t, d) {
+  const taks = d.Taksasi.filter(x => x.tanamId === t.id).sort(urutTglTurun)[0];
+  const pan = d.Panen.filter(x => x.tanamId === t.id);
+  const target = angka(t.target);
+  const hasil = angka(t.benihBersih);
+  const est = taks ? angka(taks.estimasi) : null;
+  const pct = target && hasil !== null ? hasil / target * 100 : null;
+  const pctEst = target && est !== null ? est / target * 100 : null;
+  const status = hasil !== null ? (target ? (pct >= 100 ? 'Tercapai' : 'Belum tercapai') : 'Selesai') : 'Menunggu hasil';
+  return { target: target, est: est, pctEst: pctEst, totalPanen: jumlah(pan.map(p => p.berat)), jmlPanen: pan.length, hasil: hasil, pct: pct, status: status, taks: taks };
+}
+
+/* ====================== SERVER & SINKRONISASI ====================== */
+const MODE_GAS = !!(window.google && google.script && google.script.run);
+function errOffline(pesan) { const e = new Error(pesan); e.offline = true; return e; }
+function prosesHasil(r) {
+  if (!r || typeof r !== 'object') throw new Error('Respons server tidak valid');
+  if (r.ok) return r.data;
+  if (r.error === 'SESI_HABIS') { const e = new Error('Sesi berakhir, silakan login lagi'); e.sesi = true; sesiHabis(); throw e; }
+  throw new Error(r.error);
+}
+/* Mode 1: aplikasi dibuka dari link Apps Script */
+function panggilGas(fn, args) {
+  return new Promise((res, rej) => {
+    let selesai = false;
+    const batas = setTimeout(() => { if (selesai) return; selesai = true; rej(errOffline('Waktu habis, sinyal lemah')); }, 120000);
+    google.script.run
+      .withSuccessHandler(r => { if (selesai) return; selesai = true; clearTimeout(batas); res(r); })
+      .withFailureHandler(err => { if (selesai) return; selesai = true; clearTimeout(batas); rej(errOffline('Tidak dapat terhubung: ' + String((err && err.message) || err))); })[fn](...args);
+  });
+}
+/* Mode 2: aplikasi terpasang (GitHub Pages) memanggil server Apps Script lewat internet */
+async function panggilServer(fn, args, url) {
+  url = url || S.server;
+  if (!url) throw new Error('Link server belum diatur');
+  if (navigator.onLine === false) throw errOffline('Tidak ada sinyal');
+  const ctrl = window.AbortController ? new AbortController() : null;
+  const batas = setTimeout(() => { if (ctrl) ctrl.abort(); }, 120000);
+  let res;
+  try {
+    res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ fn: fn, args: args }), redirect: 'follow', signal: ctrl ? ctrl.signal : undefined });
+  } catch (e) {
+    throw errOffline('Tidak dapat terhubung ke server');
+  } finally {
+    clearTimeout(batas);
+  }
+  const teks = await res.text().catch(() => '');
+  try { return JSON.parse(teks); }
+  catch (e) { throw new Error('Server tidak membalas dengan benar. Pastikan link berakhiran /exec dan akses deployment "Siapa saja".'); }
+}
+async function panggil(fn, ...args) {
+  const r = MODE_GAS ? await panggilGas(fn, args) : await panggilServer(fn, args);
+  return prosesHasil(r);
+}
+
+let timerSinkron = null;
+function jadwalSinkron(ms) { clearTimeout(timerSinkron); timerSinkron = setTimeout(() => sinkron(false), ms === undefined ? 800 : ms); }
+
+async function sinkron(manual) {
+  if (!S.token) return;
+  if (S.sinkron) { if (manual) toast('Sedang menyinkron…'); return; }
+  S.sinkron = true;
+  renderStatus();
+  try {
+    const ops = S.antre.slice();
+    const kirim = ops.map(o => ({ opId: o.opId, jenis: o.jenis, tabel: o.tabel, id: o.id, data: o.data, key: o.key, value: o.value }));
+    const r = await panggil('apiSync', S.token, kirim);
+    const terkirim = new Set(ops.map(o => o.opId));
+    S.antre = S.antre.filter(o => !terkirim.has(o.opId));
+    for (const o of ops) await Simpan.del('antre', o.opId);
+    (r.hasil || []).forEach(h => {
+      if (!h.ok) toast('Gagal disimpan di server: ' + h.pesan, 'error', 8000);
+      else if (h.pesan) toast(h.pesan, 'info', 7000);
+    });
+    await setSnap(r.data);
+    S.online = true;
+    const tunggu = Object.values(S.fotoLokal).filter(f => !f.terkirim && !f.dihapus);
+    let n = 0;
+    for (const f of tunggu) {
+      n++;
+      renderStatus('Mengirim foto ' + n + '/' + tunggu.length + '…');
+      const h = await panggil('apiUploadFoto', S.token, { id: f.id, inspeksiId: f.inspeksiId, kodeTanam: f.kodeTanam, data: f.data });
+      f.terkirim = true;
+      f.fileId = h.fileId;
+      delete f.data;
+      await Simpan.set('foto', f.id, f);
+    }
+    if (tunggu.length) await setSnap(await panggil('apiAmbil', S.token));
+    S.terakhir = new Date();
+    if (manual) toast('✓ Semua data sudah tersinkron', 'ok');
+  } catch (e) {
+    if (e.offline) {
+      S.online = false;
+      if (manual) toast('Tidak ada sinyal. Data aman di HP dan dikirim otomatis saat ada sinyal.', 'warn', 6000);
+    } else if (!e.sesi) {
+      toast(e.message, 'error', 7000);
+    }
+  } finally {
+    S.sinkron = false;
+    S.cache = null;
+    if (S.token && S.mulai) { renderStatus(); renderUlang(); }
+  }
+}
+
+function renderStatus(teks) {
+  const el = $('#statusSinkron');
+  if (!el) return;
+  const n = jumlahMenunggu();
+  el.className = 'status-sinkron';
+  if (teks) { el.textContent = teks; return; }
+  if (S.sinkron) { el.textContent = '⟳ Menyinkron…'; return; }
+  if (!S.online) { el.classList.add('offline'); el.textContent = 'Offline' + (n ? ' · ' + n + ' menunggu' : ''); return; }
+  if (n) { el.classList.add('tunggu'); el.textContent = n + ' menunggu'; return; }
+  el.textContent = '✓ Tersinkron';
+}
+
+function bannerAntre() {
+  const n = S.antre.length, f = fotoMenunggu();
+  if (!n && !f) return '';
+  const bagian = [];
+  if (n) bagian.push(n + ' perubahan data');
+  if (f) bagian.push(f + ' foto');
+  return '<div class="pending-banner">⏳ ' + bagian.join(' dan ') + ' belum terkirim ke Google Sheets. ' + (S.online ? 'Sedang dikirim…' : 'Akan dikirim otomatis saat ada sinyal.') + '</div>';
+}
+
+/* ====================== NAVIGASI ====================== */
+const LAYAR = {};
+let riwayatOk = false;
+
+function shell() {
+  document.body.innerHTML =
+    '<header class="atas"><button class="btn-ikon" id="btnKembali" onclick="kembali()" aria-label="Kembali">' + IK.kembali + '</button>' +
+    '<div class="judul" id="judul"></div><button class="status-sinkron" id="statusSinkron" onclick="sinkron(true)"></button></header>' +
+    '<main id="isi"></main>' +
+    '<nav class="bawah">' + Object.keys(NAMA_TAB).map(t => '<button data-tab="' + t + '" onclick="keTab(\'' + t + '\')">' + IK[t] + '<span>' + NAMA_TAB[t] + '</span></button>').join('') + '</nav>' +
+    '<div class="toast-wrap" id="toasts"></div>';
+}
+
+function tampil(pertahankan) {
+  const top = S.stack[S.stack.length - 1];
+  const L = LAYAR[top.nama];
+  const y = window.scrollY;
+  let html;
+  try { html = L.render(top.params || {}); } catch (e) { console.error(e); html = '<div class="kartu">Terjadi kesalahan: ' + esc(e.message) + '</div>'; }
+  let judul = L.judul;
+  try { if (typeof judul === 'function') judul = judul(top.params || {}); } catch (e) { judul = ''; }
+  $('#judul').textContent = judul || '';
+  $('#btnKembali').style.visibility = S.stack.length > 1 ? 'visible' : 'hidden';
+  $('#isi').innerHTML = html;
+  $$('nav.bawah button').forEach(b => b.classList.toggle('aktif', b.dataset.tab === (L.tab || S.stack[0].nama)));
+  if (L.setelah) { try { L.setelah(top.params || {}); } catch (e) { console.error(e); } }
+  window.scrollTo(0, pertahankan ? y : 0);
+  muatFotoLazy();
+  renderStatus();
+}
+function renderUlang() {
+  const top = S.stack[S.stack.length - 1];
+  if (!top || LAYAR[top.nama].form || $('#modal')) { renderStatus(); return; }
+  tampil(true);
+}
+function buka(nama, params) {
+  S.stack.push({ nama: nama, params: params || {} });
+  tampil();
+}
+function ganti(nama, params) { S.stack[S.stack.length - 1] = { nama: nama, params: params || {} }; tampil(); }
+function kembali() {
+  if (S.stack.length <= 1) return;
+  S.stack.pop();
+  tampil();
+}
+function keTab(t) { S.stack = [{ nama: t, params: {} }]; tampil(); }
+/* Tombol "kembali" bawaan HP: satu penanda riwayat dipasang, lalu setiap kali
+   tombol kembali HP ditekan, aplikasi mundur satu layar dan memasang penanda lagi. */
+function siapkanRiwayat() {
+  const mundur = () => {
+    if ($('#modal')) { tutupModal(); return true; }
+    if (S.mulai && S.stack.length > 1) { kembali(); return true; }
+    return false;
+  };
+  try {
+    if (MODE_GAS) {
+      if (!google.script.history) return;
+      google.script.history.setChangeHandler(e => {
+        if (e && e.state && e.state.penjaga) return;
+        if (mundur()) google.script.history.push({ penjaga: 1 }, {}, '');
+      });
+      google.script.history.push({ penjaga: 1 }, {}, '');
+    } else {
+      history.replaceState({ dasar: 1 }, '');
+      history.pushState({ penjaga: 1 }, '');
+      window.addEventListener('popstate', e => {
+        if (e.state && e.state.penjaga) return;
+        if (mundur()) history.pushState({ penjaga: 1 }, '');
+        else history.back();
+      });
+    }
+    riwayatOk = true;
+  } catch (e) { riwayatOk = false; }
+}
+
+/* ====================== PASANG DI HP (PWA) ====================== */
+let promptInstal = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  promptInstal = e;
+  if (S.mulai) renderUlang();
+});
+window.addEventListener('appinstalled', () => { promptInstal = null; toast('✓ Kerjaan Jeky sudah terpasang di HP', 'ok', 5000); if (S.mulai) renderUlang(); });
+function sudahTerpasang() { return (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true; }
+async function pasangAplikasi() {
+  if (!promptInstal) { toast('Ketuk menu titik tiga Chrome → "Instal aplikasi" atau "Tambahkan ke layar utama".', 'info', 7000); return; }
+  promptInstal.prompt();
+  try { await promptInstal.userChoice; } catch (e) { /* abaikan */ }
+  promptInstal = null;
+  renderUlang();
+}
+function daftarSW() {
+  if (MODE_GAS || !('serviceWorker' in navigator)) return;
+  if (!/^https:|^http:\/\/(localhost|127\.0\.0\.1)/.test(location.href)) return;
+  navigator.serviceWorker.register('sw.js').catch(e => console.warn('Service worker gagal didaftarkan', e));
+}
+function pendekUrl(u) { const m = String(u || '').match(/\/s\/([^/]+)\/exec/); return m ? '…/s/' + m[1].slice(0, 6) + '…' + m[1].slice(-4) + '/exec' : String(u || '-'); }
+function bannerInstal() {
+  if (MODE_GAS || !promptInstal || sudahTerpasang()) return '';
+  return '<div class="kartu" style="display:flex;gap:12px;align-items:center;background:var(--h3);border-color:#C8E6C9"><div style="font-size:26px">📲</div><div style="flex:1"><b>Pasang di HP</b><div class="muted">Buka seperti aplikasi biasa, bisa tanpa sinyal.</div></div><button class="btn kecil" onclick="pasangAplikasi()">Pasang</button></div>';
+}
+
+/* ====================== KOMPONEN ====================== */
+function toast(pesan, jenis, ms) {
+  const wrap = $('#toasts');
+  if (!wrap) return;
+  const el = document.createElement('div');
+  el.className = 'toast ' + (jenis || '');
+  el.textContent = pesan;
+  wrap.appendChild(el);
+  setTimeout(() => el.remove(), ms || 3200);
+}
+function toastSimpan() { toast(S.online && navigator.onLine ? '✓ Tersimpan' : '✓ Tersimpan di HP. Dikirim saat ada sinyal.', 'ok'); }
+function kosong(teks) { return '<div class="kosong">' + teks + '</div>'; }
+function stat(n, label, warna, klik) { return '<div class="stat ' + (warna || '') + '"' + (klik ? ' ' + klik : '') + '><div class="n">' + n + '</div><div class="l">' + label + '</div></div>'; }
+function pend(o) { return o && o._pending ? ' <span class="badge oranye">belum terkirim</span>' : ''; }
+function badgeStatus(s) { const w = s === 'Aktif' ? 'hijau' : s === 'Gagal' ? 'merah' : s === 'Selesai' ? 'biru' : ''; return '<span class="badge ' + w + '">' + esc(s || '-') + '</span>'; }
+function badgeHasil(s) { const w = s === 'Lulus' ? 'hijau' : s === 'Tidak lulus' ? 'merah' : 'oranye'; return s ? '<span class="badge ' + w + '">' + esc(s) + '</span>' : ''; }
+function modal(html, tetap) {
+  tutupModal();
+  const bg = document.createElement('div');
+  bg.className = 'modal-bg';
+  bg.id = 'modal';
+  bg.innerHTML = '<div class="modal">' + html + '</div>';
+  bg.addEventListener('click', e => { if (e.target === bg && !tetap) tutupModal(); });
+  document.body.appendChild(bg);
+  return { isi: h => { const m = bg.querySelector('.modal'); if (m) m.innerHTML = h; } };
+}
+function tutupModal() { const m = $('#modal'); if (m) m.remove(); }
+function konfirmasi(pesan, ya, bahaya) {
+  return new Promise(res => {
+    modal('<p style="margin-top:0">' + pesan + '</p><div class="baris-btn" style="justify-content:flex-end"><button class="btn dua" id="mTidak">Batal</button><button class="btn ' + (bahaya ? 'merah' : '') + '" id="mYa">' + (ya || 'Ya') + '</button></div>');
+    $('#mTidak').onclick = () => { tutupModal(); res(false); };
+    $('#mYa').onclick = () => { tutupModal(); res(true); };
+  });
+}
+function fInput(label, name, val, attrs, hint) {
+  return '<label class="f"><span>' + label + '</span><input name="' + name + '" value="' + esc(val === null || val === undefined ? '' : val) + '" ' + (attrs || '') + '>' + (hint ? '<div class="hint">' + hint + '</div>' : '') + '</label>';
+}
+function fSelect(label, name, opsi, val, attrs) {
+  return '<label class="f"><span>' + label + '</span><select name="' + name + '" ' + (attrs || '') + '>' + opsi.map(o => {
+    const v = Array.isArray(o) ? o[0] : o, l = Array.isArray(o) ? o[1] : o;
+    return '<option value="' + esc(v) + '"' + (String(v) === String(val === null || val === undefined ? '' : val) ? ' selected' : '') + '>' + esc(l) + '</option>';
+  }).join('') + '</select></label>';
+}
+function fArea(label, name, val, attrs) { return '<label class="f"><span>' + label + '</span><textarea name="' + name + '" ' + (attrs || '') + '>' + esc(val || '') + '</textarea></label>'; }
+function ambilForm(form) {
+  const o = {};
+  $$('[name]', form).forEach(el => { if (el.disabled) return; o[el.name] = el.type === 'checkbox' ? el.checked : String(el.value).trim(); });
+  return o;
+}
+function chipsKomoditas(d, aktif, fn) {
+  return '<div class="chips"><button class="chip ' + (!aktif ? 'aktif' : '') + '" ' + on(fn, '') + '>Semua</button>' +
+    d.Komoditas.filter(k => k.aktif !== false).map(k => '<button class="chip ' + (aktif === k.id ? 'aktif' : '') + '" ' + on(fn, k.id) + '>' + esc(k.nama) + '</button>').join('') + '</div>';
+}
+function tombolPeta(ko, kecil) { return ko ? '<a class="btn ' + (kecil ? 'kecil ' : '') + 'dua" href="' + esc(maps(ko[0], ko[1])) + '" target="_blank" onclick="event.stopPropagation()">📍 Peta</a>' : ''; }
+
+function itemAgenda(a, jendela, d) {
+  const w = warnaSelisih(a.selisih, jendela) || 'abu';
+  const t = a.t;
+  return '<div class="item ' + w + '" ' + on('bukaAgenda', t.id, a.s.jenis, a.s.nama) + '>' +
+    '<div class="utama"><div class="j">' + esc(a.s.nama) + '</div>' +
+    '<div class="s">' + esc(t.kode || '…') + ' · ' + esc(namaPetani(t, d)) + ' · ' + esc(namaKom(t, d)) + '</div>' +
+    '<div class="s">' + fmtTgl(a.tanggal) + '</div></div>' +
+    '<div style="text-align:right;display:flex;flex-direction:column;gap:6px;align-items:flex-end"><span class="badge ' + w + '">' + labelSelisih(a.selisih) + '</span>' + tombolPeta(koordinat(t, d), true) + '</div></div>';
+}
+function bukaAgenda(tanamId, jenis, nama) {
+  if (jenis === 'inspeksi') buka('form-inspeksi', { tanamId: tanamId, tahap: nama });
+  else if (jenis === 'panen') buka('form-panen', { tanamId: tanamId });
+  else buka('tanam', { id: tanamId });
+}
+function itemTanam(t, d, tampilPetani) {
+  const nx = berikutnya(t, d), c = capaian(t, d), jendela = jendelaHari(d);
+  let ket = '', w = '';
+  if (t.status !== 'Aktif') { ket = t.status + (c.pct !== null ? ' · capaian ' + fmtAngka(c.pct, 0) + '%' : ''); w = t.status === 'Gagal' ? 'merah' : 'biru'; }
+  else if (nx) { ket = nx.s.nama + ' · ' + labelSelisih(nx.selisih); w = warnaSelisih(nx.selisih, jendela); }
+  else if (c.hasil === null) { ket = 'Menunggu hasil akhir'; w = 'biru'; }
+  else { ket = 'Hasil sudah diisi'; w = 'hijau'; }
+  return '<div class="item ' + (w || 'hijau') + '" ' + on('buka', 'tanam', { id: t.id }) + '><div class="utama">' +
+    '<div class="j">' + esc(t.kode || '(kode menunggu)') + pend(t) + '</div>' +
+    '<div class="s">' + (tampilPetani === false ? '' : esc(namaPetani(t, d)) + ' · ') + esc(namaKom(t, d)) + (t.varietas ? ' · ' + esc(t.varietas) : '') + '</div>' +
+    '<div class="s">Tanam ' + fmtTgl(t.tglTanam) + ' · ' + fmtAngka(t.luas) + ' ha</div>' +
+    '<div class="s" style="margin-top:4px"><span class="badge ' + w + '">' + esc(ket) + '</span></div></div></div>';
+}
+
+/* ====================== LAYAR: BERANDA ====================== */
+LAYAR.beranda = {
+  judul: 'Kerjaan Jeky', tab: 'beranda',
+  render() {
+    const d = data(), hari = hariIni(), jendela = jendelaHari(d);
+    const ag = agenda(d);
+    const terlewat = ag.filter(a => a.selisih < 0), segera = ag.filter(a => a.selisih >= 0 && a.selisih <= jendela);
+    const aktif = d.Tanam.filter(t => t.status === 'Aktif');
+    const tungguHasil = aktif.filter(t => d.Panen.some(p => p.tanamId === t.id) && angka(t.benihBersih) === null);
+    const baris = d.Komoditas.filter(k => k.aktif !== false).map(k => {
+      const tt = aktif.filter(t => t.komoditasId === k.id), agk = ag.filter(a => a.t.komoditasId === k.id);
+      const lw = agk.filter(a => a.selisih < 0).length, sg = agk.filter(a => a.selisih >= 0 && a.selisih <= jendela).length;
+      return '<tr ' + on('filterJadwalDari', k.id) + ' style="cursor:pointer"><td><b>' + esc(k.nama) + '</b></td><td class="num">' + tt.length + '</td><td class="num">' + fmtAngka(jumlah(tt.map(t => t.luas))) + '</td><td class="num">' + sg + '</td><td class="num ' + (lw ? 'merah' : '') + '">' + lw + '</td></tr>';
+    }).join('');
+    return '<div class="sapa"><div class="muted">' + fmtTglPanjang(hari) + '</div><div class="h1">Selamat ' + salam() + ' 👋</div></div>' +
+      bannerInstal() + bannerAntre() +
+      '<div class="stat-grid">' + stat(d.Petani.filter(p => p.status === 'Aktif').length, 'Petani aktif', '', on('keTab', 'petani')) + stat(aktif.length, 'Tanam aktif') + stat(fmtAngka(jumlah(aktif.map(t => t.luas))), 'Luas aktif (ha)') + '</div>' +
+      '<div class="stat-grid">' + stat(terlewat.length, 'Kegiatan terlewat', terlewat.length ? 'merah' : '', on('keTab', 'jadwal')) + stat(segera.length, 'Dalam ' + jendela + ' hari', segera.length ? 'oranye' : '', on('keTab', 'jadwal')) + stat(tungguHasil.length, 'Menunggu hasil akhir', tungguHasil.length ? 'biru' : '') + '</div>' +
+      '<h2 class="bagian">Per komoditas</h2><div class="kartu tabel-wrap"><table><thead><tr><th>Komoditas</th><th class="num">Tanam aktif</th><th class="num">Luas (ha)</th><th class="num">≤ ' + jendela + ' hari</th><th class="num">Terlewat</th></tr></thead><tbody>' + (baris || '<tr><td colspan="5" class="muted">Belum ada komoditas</td></tr>') + '</tbody></table></div>' +
+      '<h2 class="bagian">Paling mendesak</h2>' + (ag.filter(a => a.selisih <= jendela).slice(0, 6).map(a => itemAgenda(a, jendela, d)).join('') || kosong('Tidak ada kegiatan mendesak 👍')) +
+      (tungguHasil.length ? '<h2 class="bagian">Menunggu hasil akhir</h2>' + tungguHasil.map(t => itemTanam(t, d)).join('') : '') +
+      (d.Petani.length === 0 ? '<div class="kartu" style="margin-top:16px"><div class="judul-kartu">Mulai di sini</div><div class="muted">Tambahkan petani mitra pertama, lalu buat data tanamnya. Jadwal inspeksi dan panen akan dihitung otomatis.</div><div class="baris-btn"><button class="btn" ' + on('buka', 'form-petani') + '>+ Tambah Petani</button></div></div>' : '');
+  }
+};
+function filterJadwalDari(id) { S.filter.jadwalKom = id; keTab('jadwal'); }
+
+/* ====================== LAYAR: JADWAL ====================== */
+LAYAR.jadwal = {
+  judul: 'Jadwal Kegiatan', tab: 'jadwal',
+  render() {
+    const d = data(), jendela = jendelaHari(d), kf = S.filter.jadwalKom;
+    const ag = agenda(d, kf);
+    const dekat = ag.filter(a => a.selisih <= jendela);
+    const adaDekat = new Set(dekat.map(a => a.t.id));
+    const nanti = [], lihat = new Set();
+    ag.filter(a => a.selisih > jendela).forEach(a => { if (!lihat.has(a.t.id) && !adaDekat.has(a.t.id)) { lihat.add(a.t.id); nanti.push(a); } });
+    const grup = [
+      ['Terlewat — belum dilakukan', ag.filter(a => a.selisih < 0)],
+      ['Hari ini', ag.filter(a => a.selisih === 0)],
+      ['Dalam ' + jendela + ' hari ke depan', ag.filter(a => a.selisih > 0 && a.selisih <= jendela)],
+      ['Berikutnya', nanti]
+    ];
+    const isi = grup.map(g => g[1].length ? '<h2 class="bagian">' + g[0] + ' (' + g[1].length + ')</h2>' + g[1].map(a => itemAgenda(a, jendela, d)).join('') : '').join('');
+    return chipsKomoditas(d, kf, 'filterJadwal') + (isi || kosong('Belum ada jadwal. Tambahkan data tanam dari menu Petani.'));
+  }
+};
+function filterJadwal(id) { S.filter.jadwalKom = id; tampil(true); }
+
+/* ====================== LAYAR: PETANI ====================== */
+LAYAR.petani = {
+  judul: 'Petani Mitra', tab: 'petani',
+  render() {
+    return '<input type="search" id="cariPetani" placeholder="Cari nama, kode, atau desa…" value="' + esc(S.filter.cariPetani) + '" oninput="cariPetani(this.value)" style="margin-bottom:10px">' +
+      '<div id="daftarPetani">' + daftarPetaniHtml() + '</div><button class="fab" ' + on('buka', 'form-petani') + ' aria-label="Tambah petani">+</button>';
+  }
+};
+function daftarPetaniHtml() {
+  const d = data(), q = S.filter.cariPetani.toLowerCase().trim();
+  const arr = d.Petani.filter(p => !q || [p.nama, p.kode, p.desa, p.kecamatan, p.kabupaten].join(' ').toLowerCase().indexOf(q) >= 0)
+    .sort((a, b) => String(a.kode).localeCompare(String(b.kode)));
+  if (!arr.length) return kosong(q ? 'Tidak ada petani yang cocok.' : 'Belum ada petani. Tekan tombol + untuk menambah.');
+  return '<div class="muted" style="margin:0 2px 8px">' + arr.length + ' petani</div>' + arr.map(p => {
+    const tt = d.Tanam.filter(t => t.petaniId === p.id && t.status === 'Aktif');
+    const kom = Array.from(new Set(tt.map(t => namaKom(t, d)))).join(', ');
+    return '<div class="item ' + (p.status === 'Aktif' ? 'hijau' : '') + '" ' + on('buka', 'petani-detail', { id: p.id }) + '><div class="utama">' +
+      '<div class="j">' + esc(p.nama) + pend(p) + '</div><div class="s">' + esc(p.kode) + ' · ' + esc([p.desa, p.kecamatan].filter(Boolean).join(', ') || '-') + '</div>' +
+      (kom ? '<div class="s">Tanam aktif: ' + esc(kom) + '</div>' : '') + '</div>' + badgeStatus(p.status) + '</div>';
+  }).join('');
+}
+function cariPetani(v) { S.filter.cariPetani = v; $('#daftarPetani').innerHTML = daftarPetaniHtml(); }
+
+LAYAR['petani-detail'] = {
+  tab: 'petani',
+  judul(p) { const x = data().by.Petani[p.id]; return x ? x.nama : 'Petani'; },
+  render(prm) {
+    const d = data(), p = d.by.Petani[prm.id];
+    if (!p) return kosong('Data petani tidak ditemukan.');
+    const tanam = d.Tanam.filter(t => t.petaniId === p.id).sort((a, b) => String(b.tglTanam || '').localeCompare(String(a.tglTanam || '')));
+    const grup = {};
+    tanam.forEach(t => { const k = namaKom(t, d); (grup[k] = grup[k] || []).push(t); });
+    const wa = nomorWa(p.hp);
+    const ko = p.lat !== null && p.lat !== undefined && p.lat !== '' ? [p.lat, p.lng] : null;
+    return '<div class="kartu"><div class="row-between"><div><div class="h1">' + esc(p.nama) + '</div><div class="muted">' + esc(p.kode) + pend(p) + '</div></div>' + badgeStatus(p.status) + '</div>' +
+      '<dl class="info"><dt>HP / WA</dt><dd>' + esc(p.hp || '-') + '</dd><dt>Alamat</dt><dd>' + esc([p.desa, p.kecamatan, p.kabupaten].filter(Boolean).join(', ') || '-') + '</dd>' +
+      '<dt>Koordinat</dt><dd>' + (ko ? fmtKoord(ko[0]) + ', ' + fmtKoord(ko[1]) : '-') + '</dd>' + (p.catatan ? '<dt>Catatan</dt><dd>' + esc(p.catatan) + '</dd>' : '') + '</dl>' +
+      '<div class="baris-btn">' + (p.hp ? '<a class="btn kecil dua" href="tel:' + esc(p.hp) + '">📞 Telepon</a>' : '') +
+      (wa ? '<a class="btn kecil dua" href="https://wa.me/' + wa + '" target="_blank">💬 WhatsApp</a>' : '') + tombolPeta(ko, true) +
+      '<button class="btn kecil dua" ' + on('buka', 'form-petani', { id: p.id }) + '>✏️ Ubah</button><button class="btn kecil dua" ' + on('pdfPetani', p.id) + '>📄 PDF Riwayat</button></div></div>' +
+      '<div class="row-between" style="align-items:center"><h2 class="bagian">Riwayat tanam (' + tanam.length + ')</h2><button class="btn kecil" ' + on('buka', 'form-tanam', { petaniId: p.id }) + '>+ Tambah Tanam</button></div>' +
+      (Object.keys(grup).map(k => '<div style="margin:10px 2px 6px;font-weight:700;color:var(--h2)">' + esc(k) + '</div>' + grup[k].map(t => itemTanam(t, d, false)).join('')).join('') || kosong('Belum ada data tanam untuk petani ini.'));
+  }
+};
+
+/* ====================== LAYAR: DETAIL TANAM ====================== */
+function htmlCapaian(c) {
+  if (!c.target) return '<div class="muted">Target belum diisi. Isi target sesuai kontrak lewat tombol Ubah.</div>' + (c.hasil !== null ? '<div style="margin-top:6px">Hasil benih bersih: <b>' + fmtAngka(c.hasil) + ' kg</b></div>' : '');
+  const p = c.pct !== null ? c.pct : c.pctEst;
+  const lebar = Math.max(0, Math.min(100, p || 0));
+  const warna = (p || 0) >= 100 ? '' : 'oranye';
+  return '<dl class="info" style="margin-top:0"><dt>Target</dt><dd>' + fmtAngka(c.target) + ' kg</dd>' +
+    '<dt>Taksasi</dt><dd>' + (c.est !== null ? fmtAngka(c.est) + ' kg (' + fmtAngka(c.pctEst, 0) + '%)' : '-') + '</dd>' +
+    '<dt>Total panen</dt><dd>' + (c.jmlPanen ? fmtAngka(c.totalPanen) + ' kg (' + c.jmlPanen + ' kali)' : '-') + '</dd>' +
+    '<dt>Benih bersih</dt><dd>' + (c.hasil !== null ? fmtAngka(c.hasil) + ' kg' : '-') + '</dd></dl>' +
+    '<div class="progress"><div class="' + warna + '" style="width:' + lebar + '%"></div></div>' +
+    '<div class="row-between" style="align-items:center"><span class="muted">' + (c.pct !== null ? 'Capaian akhir' : c.pctEst !== null ? 'Perkiraan dari taksasi' : 'Belum ada taksasi/hasil') + '</span>' +
+    '<span class="badge ' + (c.status === 'Tercapai' ? 'hijau' : c.status === 'Belum tercapai' ? 'merah' : '') + '">' + (p !== null ? fmtAngka(p, 0) + '% · ' : '') + c.status + '</span></div>';
+}
+
+LAYAR.tanam = {
+  tab: 'petani',
+  judul(p) { const x = data().by.Tanam[p.id]; return x ? (x.kode || 'Data Tanam') : 'Data Tanam'; },
+  render(prm) {
+    const d = data(), t = d.by.Tanam[prm.id];
+    if (!t) return kosong('Data tanam tidak ditemukan.');
+    const p = d.by.Petani[t.petaniId], c = capaian(t, d), jendela = jendelaHari(d), hari = hariIni();
+    const tahap = tahapTanam(t, d);
+    const ins = d.Inspeksi.filter(x => x.tanamId === t.id).sort(urutTglTurun);
+    const tak = d.Taksasi.filter(x => x.tanamId === t.id).sort(urutTglTurun);
+    const pan = d.Panen.filter(x => x.tanamId === t.id).sort((a, b) => (a.panenKe || 0) - (b.panenKe || 0));
+    const ko = koordinat(t, d);
+    const htmlTahap = tahap.map(s => {
+      const sl = selisih(hari, s.tanggal);
+      const w = s.selesai ? 'hijau' : (t.status === 'Aktif' ? warnaSelisih(sl, jendela) : '');
+      const ket = s.selesai ? '✓ Selesai ' + (s.ref && s.ref.tanggal ? fmtTgl(s.ref.tanggal) : '') : (t.status === 'Aktif' ? labelSelisih(sl) : '-');
+      const klik = s.selesai && s.jenis === 'inspeksi' ? on('buka', 'inspeksi', { id: s.ref.id }) : (s.jenis === 'inspeksi' ? on('buka', 'form-inspeksi', { tanamId: t.id, tahap: s.nama }) : s.jenis === 'panen' ? on('buka', 'form-panen', { tanamId: t.id }) : '');
+      return '<div class="tahap" ' + klik + '><div class="dot ' + w + '"></div><div class="utama"><div style="font-weight:600">' + esc(s.nama) + '</div><div class="muted">Rencana ' + fmtTgl(s.tanggal) + (s.hst !== undefined ? ' · ' + s.hst + ' HST' : '') + '</div></div><div><span class="badge ' + w + '">' + esc(ket) + '</span></div></div>';
+    }).join('');
+    return '<div class="kartu"><div class="row-between"><div><div class="h1">' + esc(t.kode || '(kode menunggu)') + pend(t) + '</div><div class="muted">' + esc(namaKom(t, d)) + ' · ' +
+      (p ? '<span class="tautan" ' + on('buka', 'petani-detail', { id: p.id }) + '>' + esc(p.nama) + ' (' + esc(p.kode) + ')</span>' : esc(t.namaPetani || '-')) + '</div></div>' + badgeStatus(t.status) + '</div>' +
+      '<dl class="info"><dt>Varietas</dt><dd>' + esc(t.varietas || '-') + '</dd><dt>Lokasi</dt><dd>' + esc(t.lokasi || '-') + '</dd><dt>Luas</dt><dd>' + fmtAngka(t.luas) + ' ha</dd>' +
+      '<dt>Tanggal tanam</dt><dd>' + fmtTgl(t.tglTanam) + '</dd><dt>Koordinat</dt><dd>' + (ko ? fmtKoord(ko[0]) + ', ' + fmtKoord(ko[1]) + (t.lat === null || t.lat === undefined || t.lat === '' ? ' (rumah petani)' : '') : '-') + '</dd>' +
+      (t.catatan ? '<dt>Catatan</dt><dd>' + esc(t.catatan) + '</dd>' : '') + '</dl>' +
+      '<div class="baris-btn">' + tombolPeta(ko, true) + '<button class="btn kecil dua" ' + on('buka', 'form-tanam', { id: t.id }) + '>✏️ Ubah</button></div></div>' +
+      '<div class="kartu"><div class="judul-kartu">Capaian target</div>' + htmlCapaian(c) + '</div>' +
+      '<div class="kartu"><div class="judul-kartu">Tahapan</div>' + (htmlTahap || '<div class="muted">Komoditas belum punya tahapan.</div>') + '</div>' +
+      '<div class="grid2" style="margin-bottom:12px"><button class="btn" ' + on('buka', 'form-inspeksi', { tanamId: t.id }) + '>+ Inspeksi</button><button class="btn dua" ' + on('buka', 'form-taksasi', { tanamId: t.id }) + '>+ Taksasi</button>' +
+      '<button class="btn dua" ' + on('buka', 'form-panen', { tanamId: t.id }) + '>+ Panen</button><button class="btn dua" ' + on('buka', 'form-hasil', { id: t.id }) + '>Hasil Akhir</button></div>' +
+      '<h2 class="bagian">Inspeksi (' + ins.length + ')</h2>' + (ins.map(i => '<div class="item ' + (i.hasil === 'Tidak lulus' ? 'merah' : i.hasil === 'Lulus' ? 'hijau' : 'oranye') + '" ' + on('buka', 'inspeksi', { id: i.id }) + '><div class="utama"><div class="j">' + esc(i.tahap) + pend(i) + '</div><div class="s">' + fmtTgl(i.tanggal) + ' · ' + esc(i.kondisi || '') + (d.Foto.some(f => f.inspeksiId === i.id) ? ' · 📷' : '') + '</div></div>' + badgeHasil(i.hasil) + '</div>').join('') || kosong('Belum ada inspeksi.')) +
+      '<h2 class="bagian">Taksasi (' + tak.length + ')</h2>' + (tak.map(x => '<div class="item biru" ' + on('buka', 'form-taksasi', { id: x.id }) + '><div class="utama"><div class="j">' + fmtAngka(x.estimasi) + ' kg' + pend(x) + '</div><div class="s">' + fmtTgl(x.tanggal) + ' · ' + fmtAngka(x.produktif, 0) + ' tanaman × ' + fmtAngka(x.buah) + ' buah/polong</div></div></div>').join('') || kosong('Belum ada taksasi.')) +
+      '<h2 class="bagian">Panen (' + pan.length + ')</h2>' + (pan.map(x => '<div class="item hijau" ' + on('buka', 'form-panen', { id: x.id }) + '><div class="utama"><div class="j">Panen ke-' + esc(x.panenKe) + ' · ' + fmtAngka(x.berat) + ' kg' + pend(x) + '</div><div class="s">' + fmtTgl(x.tanggal) + (x.catatan ? ' · ' + esc(x.catatan) : '') + '</div></div></div>').join('') || kosong('Belum ada panen.')) +
+      '<div class="baris-btn" style="margin-top:24px"><button class="btn bahaya kecil" ' + on('hapusTanam', t.id) + '>🗑 Hapus data tanam ini</button></div>';
+  }
+};
+
+/* ====================== LAYAR: DETAIL INSPEKSI ====================== */
+function imgFoto(f) {
+  const lok = S.fotoLokal[f.id];
+  const src = (lok && (lok.thumb || lok.data)) || (f.fileId && S.fotoCache[f.fileId]) || '';
+  return '<img class="foto" alt="Foto inspeksi" ' + (src ? 'src="' + src + '"' : (f.fileId ? 'data-file="' + esc(f.fileId) + '"' : '')) + ' onclick="lihatFoto(this)">';
+}
+function lihatFoto(img) {
+  if (!img.src) return;
+  modal('<img src="' + img.src + '" alt="Foto"><div class="baris-btn" style="justify-content:flex-end"><button class="btn dua" onclick="tutupModal()">Tutup</button></div>');
+}
+function muatFotoLazy() {
+  $$('img[data-file]').forEach(img => {
+    const id = img.dataset.file;
+    img.removeAttribute('data-file');
+    if (S.fotoCache[id]) { img.src = S.fotoCache[id]; return; }
+    if (!S.token) return;
+    panggil('apiGetFoto', S.token, id).then(u => { S.fotoCache[id] = u; img.src = u; }).catch(() => { img.alt = 'Foto belum bisa dimuat'; img.title = 'Butuh sinyal untuk memuat foto'; });
+  });
+}
+
+LAYAR.inspeksi = {
+  judul: 'Detail Inspeksi', tab: 'petani',
+  render(prm) {
+    const d = data(), i = d.by.Inspeksi[prm.id];
+    if (!i) return kosong('Data inspeksi tidak ditemukan.');
+    const t = d.by.Tanam[i.tanamId] || {};
+    const foto = d.Foto.filter(f => f.inspeksiId === i.id);
+    const ex = i.extra || {};
+    const ko = i.lat !== null && i.lat !== undefined && i.lat !== '' ? [i.lat, i.lng] : null;
+    return '<div class="kartu"><div class="row-between"><div><div class="h1">' + esc(i.tahap) + pend(i) + '</div><div class="muted">' + esc(t.kode || i.kodeTanam) + ' · ' + esc(namaPetani(t, d)) + ' · ' + fmtTgl(i.tanggal) + '</div></div>' + badgeHasil(i.hasil) + '</div>' +
+      '<dl class="info"><dt>Jarak isolasi</dt><dd>' + esc(i.isolasi || '-') + '</dd><dt>Off-type dicabut</dt><dd>' + fmtAngka(i.offtype, 0) + '</dd>' +
+      '<dt>Hama/penyakit</dt><dd>' + esc(i.hama || '-') + ' (' + esc(i.tingkatHama || '-') + ')</dd><dt>Kondisi</dt><dd>' + esc(i.kondisi || '-') + '</dd>' +
+      Object.keys(ex).map(k => '<dt>' + esc(k) + '</dt><dd>' + esc(ex[k]) + '</dd>').join('') +
+      '<dt>Koordinat</dt><dd>' + (ko ? fmtKoord(ko[0]) + ', ' + fmtKoord(ko[1]) : '-') + '</dd><dt>Catatan</dt><dd>' + esc(i.catatan || '-') + '</dd></dl></div>' +
+      (foto.length ? '<div class="kartu"><div class="judul-kartu">Foto (' + foto.length + ')</div><div class="foto-grid">' + foto.map(imgFoto).join('') + '</div></div>' : '') +
+      '<div class="baris-btn"><button class="btn dua" ' + on('buka', 'form-inspeksi', { id: i.id }) + '>✏️ Ubah</button><button class="btn dua" ' + on('pdfInspeksi', i.id) + '>📄 PDF</button>' + tombolPeta(ko) +
+      '<button class="btn bahaya" ' + on('hapusInspeksi', i.id) + '>🗑 Hapus</button></div>';
+  }
+};
+
+/* ====================== LAYAR: LAPORAN ====================== */
+function dataLaporan(d) {
+  const kf = S.filter.lapKom, th = S.filter.lapTahun;
+  const rows = d.Tanam.filter(t => (!kf || t.komoditasId === kf) && (!th || String(t.tglTanam || '').indexOf(th) === 0))
+    .sort((a, b) => String(a.kode).localeCompare(String(b.kode)))
+    .map(t => ({ t: t, c: capaian(t, d) }));
+  const ringkas = d.Komoditas.filter(k => rows.some(r => r.t.komoditasId === k.id)).map(k => {
+    const rr = rows.filter(r => r.t.komoditasId === k.id);
+    const sel = rr.filter(r => r.c.hasil !== null);
+    const tSel = jumlah(sel.map(r => r.c.target)), hSel = jumlah(sel.map(r => r.c.hasil));
+    return {
+      k: k, n: rr.length, target: jumlah(rr.map(r => r.c.target)), est: rr.some(r => r.c.est !== null) ? jumlah(rr.map(r => r.c.est)) : null,
+      nSel: sel.length, hasil: hSel, targetSel: tSel, pct: tSel ? hSel / tSel * 100 : null,
+      tercapai: sel.filter(r => r.c.status === 'Tercapai').length
+    };
+  });
+  return { rows: rows, ringkas: ringkas };
+}
+LAYAR.laporan = {
+  judul: 'Laporan Capaian', tab: 'laporan',
+  render() {
+    const d = data();
+    const tahun = Array.from(new Set(d.Tanam.map(t => String(t.tglTanam || '').slice(0, 4)).filter(Boolean))).sort().reverse();
+    const L = dataLaporan(d);
+    return '<div class="grid2">' + fSelect('Komoditas', 'lapKom', [['', 'Semua']].concat(d.Komoditas.map(k => [k.id, k.nama])), S.filter.lapKom, 'onchange="setFilterLap(\'lapKom\',this.value)"') +
+      fSelect('Tahun tanam', 'lapTahun', [['', 'Semua']].concat(tahun.map(y => [y, y])), S.filter.lapTahun, 'onchange="setFilterLap(\'lapTahun\',this.value)"') + '</div>' +
+      '<h2 class="bagian">Ringkasan per komoditas</h2>' +
+      (L.ringkas.map(r => '<div class="kartu"><div class="row-between"><div class="judul-kartu">' + esc(r.k.nama) + '</div><span class="badge">' + r.n + ' tanam</span></div>' +
+        '<dl class="info" style="margin-top:0"><dt>Total target</dt><dd>' + fmtAngka(r.target) + ' kg</dd><dt>Total taksasi</dt><dd>' + fmtAngka(r.est) + ' kg</dd>' +
+        '<dt>Sudah ada hasil</dt><dd>' + r.nSel + ' tanam (' + r.tercapai + ' tercapai)</dd><dt>Hasil benih bersih</dt><dd>' + fmtAngka(r.hasil) + ' kg dari target ' + fmtAngka(r.targetSel) + ' kg</dd></dl>' +
+        (r.pct !== null ? '<div class="progress"><div class="' + (r.pct >= 100 ? '' : 'oranye') + '" style="width:' + Math.min(100, r.pct) + '%"></div></div><div class="muted">Capaian: <b>' + fmtAngka(r.pct, 1) + '%</b> (tanam yang sudah ada hasil)</div>' : '') + '</div>').join('') || kosong('Belum ada data tanam.')) +
+      '<h2 class="bagian">Detail per kode tanam</h2>' +
+      (L.rows.length ? '<div class="kartu tabel-wrap"><table><thead><tr><th>Kode</th><th>Petani</th><th class="num">Target</th><th class="num">Taksasi</th><th class="num">Benih bersih</th><th class="num">Capaian</th><th>Status</th></tr></thead><tbody>' +
+        L.rows.map(r => '<tr ' + on('buka', 'tanam', { id: r.t.id }) + ' style="cursor:pointer"><td><b>' + esc(r.t.kode) + '</b></td><td>' + esc(namaPetani(r.t, d)) + '</td><td class="num">' + fmtAngka(r.c.target) + '</td><td class="num">' + fmtAngka(r.c.est) + '</td><td class="num">' + fmtAngka(r.c.hasil) + '</td>' +
+          '<td class="num ' + (r.c.status === 'Tercapai' ? 'hijau' : r.c.status === 'Belum tercapai' ? 'merah' : '') + '">' + (r.c.pct !== null ? fmtAngka(r.c.pct, 0) + '%' : '-') + '</td><td>' + esc(r.t.status === 'Gagal' ? 'Gagal' : r.c.status) + '</td></tr>').join('') +
+        '</tbody></table></div><div class="muted">Satuan kg benih bersih. Ketuk baris untuk membuka detail.</div>' : kosong('Tidak ada data untuk filter ini.')) +
+      '<div class="baris-btn" style="margin-top:14px"><button class="btn" ' + on('pdfCapaian') + '>📄 PDF Laporan Capaian</button>' +
+      (S.snap && S.snap.sheetUrl ? '<a class="btn dua" href="' + esc(S.snap.sheetUrl) + '" target="_blank">📊 Buka Google Sheets</a>' : '') + '</div>';
+  }
+};
+function setFilterLap(k, v) { S.filter[k] = v; tampil(true); }
+
+/* ====================== LAYAR: PENGATURAN ====================== */
+LAYAR.pengaturan = {
+  judul: 'Pengaturan', tab: 'pengaturan', form: true,
+  render() {
+    const d = data();
+    return '<h2 class="bagian" style="margin-top:4px">Komoditas</h2>' +
+      d.Komoditas.map(k => '<div class="item ' + (k.aktif !== false ? 'hijau' : '') + '" ' + on('buka', 'form-komoditas', { id: k.id }) + '><div class="utama"><div class="j">' + esc(k.nama) + ' <span class="badge">' + esc(k.kode) + '</span>' + pend(k) + '</div>' +
+        '<div class="s">' + (k.tahap || []).length + ' tahap inspeksi · panen ' + esc(k.hstPanen) + ' HST · ' + (k.fields || []).length + ' kolom tambahan</div></div>' + (k.aktif === false ? '<span class="badge">Nonaktif</span>' : '') + '</div>').join('') +
+      '<button class="btn dua penuh" ' + on('buka', 'form-komoditas') + '>+ Tambah Komoditas</button>' +
+      '<h2 class="bagian">Peringatan jadwal</h2><div class="kartu"><label class="f"><span>Beri tanda oranye berapa hari sebelum jadwal?</span><input type="number" id="inJendela" min="1" max="60" inputmode="numeric" value="' + jendelaHari(d) + '"></label><button class="btn kecil" onclick="simpanJendela()">Simpan</button></div>' +
+      '<h2 class="bagian">Sinkronisasi</h2><div class="kartu"><dl class="info" style="margin-top:0"><dt>Koneksi</dt><dd>' + (S.online ? 'Online' : 'Offline') + '</dd><dt>Data menunggu</dt><dd>' + S.antre.length + '</dd><dt>Foto menunggu</dt><dd>' + fotoMenunggu() + '</dd>' +
+      '<dt>Terakhir sinkron</dt><dd>' + (S.terakhir ? pad(S.terakhir.getHours()) + ':' + pad(S.terakhir.getMinutes()) : '-') + '</dd></dl>' +
+      '<div class="baris-btn"><button class="btn kecil" onclick="sinkron(true)">⟳ Sinkron sekarang</button>' + (S.snap && S.snap.sheetUrl ? '<a class="btn kecil dua" href="' + esc(S.snap.sheetUrl) + '" target="_blank">📊 Buka Google Sheets</a>' : '') + '</div></div>' +
+      (MODE_GAS ? '' : '<h2 class="bagian">Aplikasi</h2><div class="kartu"><dl class="info" style="margin-top:0"><dt>Tampilan</dt><dd>' + (sudahTerpasang() ? 'Terpasang di HP ✓' : 'Di browser') + '</dd><dt>Server</dt><dd>' + esc(pendekUrl(S.server)) + '</dd></dl>' +
+        '<div class="baris-btn">' + (sudahTerpasang() ? '' : '<button class="btn kecil" onclick="pasangAplikasi()">📲 Pasang di HP</button>') + '<button class="btn kecil dua" onclick="gantiServer()">Ganti link server</button></div></div>') +
+      '<h2 class="bagian">Ganti password</h2><form class="kartu" ' + onSubmit('gantiPassword') + '>' +
+      fInput('Password lama', 'lama', '', 'type="password" required autocomplete="current-password"') + fInput('Password baru (min. 6 karakter)', 'baru', '', 'type="password" minlength="6" required autocomplete="new-password"') +
+      fInput('Ulangi password baru', 'ulang', '', 'type="password" required autocomplete="new-password"') + '<button class="btn kecil">Ganti Password</button></form>' +
+      '<button class="btn bahaya penuh" onclick="keluar()">Keluar (Logout)</button><p class="muted" style="text-align:center;margin-top:16px">Kerjaan Jeky · versi 1.1</p>';
+  }
+};
+async function simpanJendela() {
+  const v = parseInt($('#inJendela').value, 10);
+  if (!v || v < 1) { toast('Isi angka minimal 1', 'error'); return; }
+  await catat({ jenis: 'setting', key: 'jendela', value: v });
+  toastSimpan();
+}
+async function gantiPassword(e) {
+  e.preventDefault();
+  const f = ambilForm(e.target);
+  if (f.baru !== f.ulang) { toast('Password baru dan ulangannya tidak sama', 'error'); return; }
+  try { await panggil('apiGantiPassword', S.token, f.lama, f.baru); e.target.reset(); toast('✓ Password berhasil diganti', 'ok'); }
+  catch (err) { toast(err.offline ? 'Butuh sinyal untuk ganti password' : err.message, 'error', 6000); }
+}
+async function keluar() {
+  const n = jumlahMenunggu();
+  const ok = await konfirmasi(n ? 'Masih ada <b>' + n + '</b> data/foto yang belum terkirim. Data itu tetap tersimpan di HP ini dan dikirim setelah kamu login lagi. Tetap keluar?' : 'Keluar dari aplikasi?', 'Keluar', true);
+  if (!ok) return;
+  try { await panggil('apiLogout', S.token); } catch (e) { /* abaikan */ }
+  S.token = null;
+  await Simpan.del('kv', 'token');
+  layarLogin('Kamu sudah keluar.');
+}
+
+/* ====================== FORM: PETANI ====================== */
+function gpsWidget(lat, lng, label, auto) {
+  const ada = lat !== null && lat !== undefined && lat !== '';
+  return '<div class="gps" data-auto="' + (auto ? 1 : 0) + '"><div class="row-between" style="align-items:center"><div><div class="lbl">' + esc(label) + '</div><div class="muted gps-teks">' + (ada ? fmtKoord(lat) + ', ' + fmtKoord(lng) : 'Belum ada koordinat') + '</div></div>' +
+    '<button type="button" class="btn kecil dua" onclick="ambilGps(this)">📍 Ambil</button></div>' +
+    '<div class="grid2" style="margin-top:8px"><input name="lat" placeholder="Latitude" inputmode="decimal" value="' + esc(ada ? lat : '') + '"><input name="lng" placeholder="Longitude" inputmode="decimal" value="' + esc(ada ? lng : '') + '"></div>' +
+    '<div class="hint">Tekan “Ambil” saat berada di lokasi. GPS tetap bisa dipakai tanpa sinyal internet.</div></div>';
+}
+function ambilGps(btn, diam) {
+  const box = btn.closest('.gps'), teks = $('.gps-teks', box);
+  if (!navigator.geolocation) { if (!diam) toast('Browser tidak mendukung GPS. Isi koordinat manual.', 'warn'); return; }
+  teks.textContent = 'Mencari lokasi… (pastikan Lokasi/GPS HP aktif)';
+  btn.disabled = true;
+  navigator.geolocation.getCurrentPosition(pos => {
+    const c = pos.coords;
+    $('[name=lat]', box).value = c.latitude.toFixed(6);
+    $('[name=lng]', box).value = c.longitude.toFixed(6);
+    teks.textContent = c.latitude.toFixed(6) + ', ' + c.longitude.toFixed(6) + ' (akurasi ±' + Math.round(c.accuracy) + ' m)';
+    btn.disabled = false;
+  }, err => {
+    btn.disabled = false;
+    teks.textContent = 'Lokasi belum didapat';
+    if (!diam) toast(err.code === 1 ? 'Izin lokasi ditolak. Izinkan akses lokasi di browser, atau ketik koordinat manual.' : err.code === 2 ? 'Sinyal GPS tidak ditemukan. Coba di tempat terbuka.' : 'Waktu mencari GPS habis. Coba tekan Ambil lagi.', 'warn', 7000);
+  }, { enableHighAccuracy: true, timeout: 30000, maximumAge: 60000 });
+}
+
+LAYAR['form-petani'] = {
+  form: true, tab: 'petani',
+  judul(p) { return p.id ? 'Ubah Petani' : 'Tambah Petani'; },
+  render(prm) {
+    const d = data(), p = prm.id ? d.by.Petani[prm.id] : null;
+    if (prm.id && !p) return kosong('Data tidak ditemukan.');
+    const x = p || {};
+    return '<form class="kartu" ' + onSubmit('simpanPetani', prm.id || '') + '>' +
+      fInput('Kode Petani', 'kode', p ? p.kode : nextKode(d.Petani, 'BWS-', 3), p ? 'autocapitalize="characters"' : 'readonly', p ? 'Kode bisa diubah, tapi harus unik.' : 'Dibuat otomatis.') +
+      fInput('Nama Petani *', 'nama', x.nama, 'required autocomplete="off"') +
+      fInput('No. HP / WA', 'hp', x.hp, 'type="tel" inputmode="tel" placeholder="08…"') +
+      '<div class="grid2">' + fInput('Desa', 'desa', x.desa) + fInput('Kecamatan', 'kecamatan', x.kecamatan) + '</div>' +
+      fInput('Kabupaten', 'kabupaten', x.kabupaten) +
+      fSelect('Status kemitraan', 'status', ['Aktif', 'Tidak Aktif', 'Calon'], x.status || 'Aktif') +
+      gpsWidget(x.lat, x.lng, 'Lokasi rumah / lahan utama') +
+      fArea('Catatan', 'catatan', x.catatan) +
+      '<button class="btn penuh">Simpan</button>' + (p ? '<button type="button" class="btn bahaya penuh" style="margin-top:10px" ' + on('hapusPetani', p.id) + '>🗑 Hapus petani</button>' : '') + '</form>';
+  }
+};
+async function simpanPetani(e, id) {
+  e.preventDefault();
+  const f = ambilForm(e.target), d = data();
+  if (!f.nama) { toast('Nama petani wajib diisi', 'error'); return; }
+  const kode = (f.kode || '').toUpperCase();
+  if (!kode) { toast('Kode petani wajib diisi', 'error'); return; }
+  if (d.Petani.some(p => p.id !== id && p.kode === kode)) { toast('Kode ' + kode + ' sudah dipakai petani lain', 'error'); return; }
+  const rec = { id: id || uuid(), kode: kode, nama: f.nama, hp: f.hp, desa: f.desa, kecamatan: f.kecamatan, kabupaten: f.kabupaten, status: f.status, lat: angka(f.lat), lng: angka(f.lng), catatan: f.catatan };
+  await simpanRec('Petani', rec);
+  toastSimpan();
+  if (id) kembali(); else ganti('petani-detail', { id: rec.id });
+}
+async function hapusPetani(id) {
+  const d = data();
+  if (d.Tanam.some(t => t.petaniId === id)) { toast('Petani ini punya data tanam. Ubah statusnya menjadi "Tidak Aktif" saja.', 'warn', 7000); return; }
+  if (!await konfirmasi('Hapus petani ini?', 'Hapus', true)) return;
+  await hapusRec('Petani', id);
+  toastSimpan();
+  keTab('petani');
+}
+
+/* ====================== FORM: TANAM ====================== */
+LAYAR['form-tanam'] = {
+  form: true, tab: 'petani',
+  judul(p) { return p.id ? 'Ubah Data Tanam' : 'Tambah Tanam'; },
+  render(prm) {
+    const d = data(), t = prm.id ? d.by.Tanam[prm.id] : null;
+    if (prm.id && !t) return kosong('Data tidak ditemukan.');
+    const x = t || {};
+    const pid = t ? t.petaniId : prm.petaniId;
+    const p = pid ? d.by.Petani[pid] : null;
+    const kom = d.Komoditas.filter(k => k.aktif !== false || (t && k.id === t.komoditasId));
+    if (!kom.length) return kosong('Belum ada komoditas aktif. Tambahkan di menu Pengaturan.');
+    return '<form class="kartu" ' + onSubmit('simpanTanam', prm.id || '') + '>' +
+      (t ? '<div class="hitung">Kode tanam: <b>' + esc(t.kode) + '</b></div>' : '<div class="hitung" id="previewKode"></div>') +
+      (p ? '<input type="hidden" name="petaniId" value="' + esc(p.id) + '"><div class="f"><span class="lbl">Petani</span><div>' + esc(p.nama) + ' <span class="muted">(' + esc(p.kode) + ')</span></div></div>'
+        : fSelect('Petani *', 'petaniId', [['', '— pilih petani —']].concat(d.Petani.filter(z => z.status !== 'Tidak Aktif').map(z => [z.id, z.kode + ' · ' + z.nama])), '', 'required onchange="isiDariRiwayat()"')) +
+      (t ? '<input type="hidden" name="komoditasId" value="' + esc(t.komoditasId) + '"><div class="f"><span class="lbl">Komoditas</span><div>' + esc(namaKom(t, d)) + '</div><div class="hint">Komoditas tidak bisa diubah karena sudah menjadi bagian kode tanam.</div></div>'
+        : fSelect('Komoditas *', 'komoditasId', kom.map(k => [k.id, k.nama + ' (' + k.kode + ')']), prm.komoditasId || kom[0].id, 'required onchange="previewKodeTanam();isiDariRiwayat()"')) +
+      fInput('Varietas / Galur', 'varietas', x.varietas) +
+      fInput('Lokasi / Blok lahan', 'lokasi', x.lokasi, 'placeholder="mis. Blok A, sawah belakang rumah"') +
+      '<div class="grid2">' + fInput('Luas tanam (ha)', 'luas', x.luas, 'type="number" step="0.001" min="0" inputmode="decimal"') +
+      fInput('Tanggal tanam *', 'tglTanam', x.tglTanam || hariIni(), 'type="date" required onchange="previewKodeTanam()"') + '</div>' +
+      fInput('Target benih bersih (kg) *', 'target', x.target, 'type="number" step="0.01" min="0" inputmode="decimal" required', 'Sesuai kontrak dengan petani.') +
+      (t ? fSelect('Status', 'status', ['Aktif', 'Selesai', 'Gagal'], t.status || 'Aktif') : '') +
+      gpsWidget(x.lat, x.lng, 'Titik lokasi lahan') +
+      fArea('Catatan', 'catatan', x.catatan) +
+      '<button class="btn penuh">Simpan</button></form>';
+  },
+  setelah(prm) { if (!prm.id) { previewKodeTanam(); isiDariRiwayat(); } }
+};
+function kodeTanamBaru(d, komId, tgl) {
+  const k = d.by.Komoditas[komId];
+  if (!k) return '';
+  const th = /^\d{4}/.test(tgl || '') ? tgl.slice(0, 4) : String(new Date().getFullYear());
+  return nextKode(d.Tanam, k.kode + '-' + th + '-', 3);
+}
+function previewKodeTanam() {
+  const el = $('#previewKode'), f = $('form');
+  if (!el || !f) return;
+  const kode = kodeTanamBaru(data(), f.komoditasId.value, f.tglTanam.value);
+  el.innerHTML = 'Kode tanam: <b>' + esc(kode || '-') + '</b> <span class="muted">(otomatis)</span>';
+}
+function isiDariRiwayat() {
+  const f = $('form');
+  if (!f || !f.petaniId || !f.komoditasId) return;
+  const d = data();
+  const lalu = d.Tanam.filter(t => t.petaniId === f.petaniId.value && t.komoditasId === f.komoditasId.value).sort((a, b) => String(b.tglTanam || '').localeCompare(String(a.tglTanam || '')))[0];
+  if (!lalu) return;
+  if (!f.varietas.value && lalu.varietas) f.varietas.value = lalu.varietas;
+  if (!f.luas.value && lalu.luas !== null && lalu.luas !== undefined) f.luas.value = lalu.luas;
+  if (!f.lokasi.value && lalu.lokasi) f.lokasi.value = lalu.lokasi;
+}
+async function simpanTanam(e, id) {
+  e.preventDefault();
+  const f = ambilForm(e.target), d = data();
+  if (!f.petaniId) { toast('Pilih petani dulu', 'error'); return; }
+  const k = d.by.Komoditas[f.komoditasId], p = d.by.Petani[f.petaniId];
+  if (!k || !p) { toast('Petani atau komoditas tidak ditemukan', 'error'); return; }
+  if (!f.tglTanam) { toast('Tanggal tanam wajib diisi', 'error'); return; }
+  const lama = id ? d.by.Tanam[id] : null;
+  const rec = {
+    id: id || uuid(), kode: lama ? lama.kode : kodeTanamBaru(d, k.id, f.tglTanam), petaniId: p.id, kodePetani: p.kode, namaPetani: p.nama,
+    komoditasId: k.id, komoditas: k.nama, varietas: f.varietas, lokasi: f.lokasi, luas: angka(f.luas), tglTanam: f.tglTanam,
+    target: angka(f.target), status: f.status || (lama ? lama.status : 'Aktif'), lat: angka(f.lat), lng: angka(f.lng), catatan: f.catatan
+  };
+  await simpanRec('Tanam', rec);
+  toastSimpan();
+  if (id) kembali(); else ganti('tanam', { id: rec.id });
+}
+async function hapusTanam(id) {
+  const d = data(), t = d.by.Tanam[id];
+  if (!t) return;
+  if (!await konfirmasi('Hapus data tanam <b>' + esc(t.kode) + '</b> beserta semua inspeksi, taksasi, dan panennya?', 'Hapus', true)) return;
+  for (const n of ['Inspeksi', 'Taksasi', 'Panen']) {
+    for (const x of d[n].filter(y => y.tanamId === id)) await hapusRec(n, x.id);
+  }
+  await hapusRec('Tanam', id);
+  toastSimpan();
+  kembali();
+}
+
+/* ====================== FORM: INSPEKSI ====================== */
+function fieldExtra(f, n, val) {
+  const attr = 'data-extra="' + esc(f.label) + '"';
+  if (f.tipe === 'pilihan') {
+    const ops = String(f.opsi || '').split(',').map(s => s.trim()).filter(Boolean);
+    return fSelect(esc(f.label), 'x' + n, [['', '— pilih —']].concat(ops), val, attr);
+  }
+  if (f.tipe === 'angka') return fInput(esc(f.label), 'x' + n, val, 'type="number" step="any" inputmode="decimal" ' + attr);
+  return fInput(esc(f.label), 'x' + n, val, attr);
+}
+LAYAR['form-inspeksi'] = {
+  form: true, tab: 'petani',
+  judul(p) { return p.id ? 'Ubah Inspeksi' : 'Isi Inspeksi'; },
+  render(prm) {
+    const d = data(), i = prm.id ? d.by.Inspeksi[prm.id] : null;
+    if (prm.id && !i) return kosong('Data tidak ditemukan.');
+    const t = d.by.Tanam[i ? i.tanamId : prm.tanamId];
+    if (!t) return kosong('Data tanam tidak ditemukan.');
+    const k = d.by.Komoditas[t.komoditasId] || { tahap: [], fields: [] };
+    const x = i || {}, ex = x.extra || {};
+    const opsi = (k.tahap || []).map(s => s.nama).concat(['Inspeksi tambahan']);
+    if (x.tahap && opsi.indexOf(x.tahap) < 0) opsi.unshift(x.tahap);
+    const blm = tahapTanam(t, d).find(s => s.jenis === 'inspeksi' && !s.selesai);
+    const tahapDef = x.tahap || prm.tahap || (blm ? blm.nama : opsi[0]);
+    S.form = { fotoBaru: [], fotoHapus: [], fotoAda: i ? d.Foto.filter(f => f.inspeksiId === i.id) : [] };
+    return '<form class="kartu" ' + onSubmit('simpanInspeksi', prm.id || '', t.id) + '>' +
+      '<div class="hitung"><b>' + esc(t.kode) + '</b> · ' + esc(namaPetani(t, d)) + ' · ' + esc(k.nama || '') + '</div>' +
+      fSelect('Tahap', 'tahap', opsi, tahapDef) + fInput('Tanggal inspeksi', 'tanggal', x.tanggal || hariIni(), 'type="date" required') +
+      '<div class="grid2">' + fSelect('Jarak isolasi', 'isolasi', ['Memenuhi', 'Tidak memenuhi', 'Tidak dicek'], x.isolasi || 'Memenuhi') +
+      fInput('Off-type dicabut', 'offtype', x.offtype, 'type="number" min="0" inputmode="numeric" placeholder="jumlah tanaman"') + '</div>' +
+      '<div class="grid2">' + fInput('Hama / penyakit', 'hama', x.hama, 'placeholder="mis. kutu daun"') + fSelect('Tingkat serangan', 'tingkatHama', ['Tidak ada', 'Ringan', 'Sedang', 'Berat'], x.tingkatHama || 'Tidak ada') + '</div>' +
+      fSelect('Kondisi tanaman', 'kondisi', ['Baik', 'Cukup', 'Kurang'], x.kondisi || 'Baik') +
+      ((k.fields || []).length ? '<div class="sub">Khusus ' + esc(k.nama) + '</div>' + k.fields.map((f, n) => fieldExtra(f, n, ex[f.label])).join('') : '') +
+      '<div class="sub">Hasil</div>' +
+      fSelect('Hasil inspeksi', 'hasil', ['Lulus', 'Lulus dengan catatan', 'Tidak lulus'], x.hasil || 'Lulus') +
+      fArea('Catatan & rekomendasi untuk petani', 'catatan', x.catatan) +
+      gpsWidget(x.lat, x.lng, 'Lokasi saat inspeksi', !i) +
+      '<div class="f"><span class="lbl">Foto lahan (maks. 3)</span><div class="foto-grid" id="fotoForm"></div><div class="baris-btn">' +
+      '<label class="btn kecil dua">📷 Kamera<input type="file" accept="image/*" capture="environment" hidden onchange="tambahFoto(this)"></label>' +
+      '<label class="btn kecil dua">🖼️ Galeri<input type="file" accept="image/*" hidden onchange="tambahFoto(this)"></label></div><div class="hint">Foto diperkecil otomatis agar hemat kuota.</div></div>' +
+      '<button class="btn penuh">Simpan Inspeksi</button></form>';
+  },
+  setelah(prm) {
+    renderFotoForm();
+    const g = $('.gps[data-auto="1"]');
+    if (g && !$('[name=lat]', g).value) ambilGps($('button', g), true);
+  }
+};
+function jumlahFotoForm() { return S.form.fotoAda.filter(f => S.form.fotoHapus.indexOf(f.id) < 0).length + S.form.fotoBaru.length; }
+function renderFotoForm() {
+  const box = $('#fotoForm');
+  if (!box || !S.form) return;
+  const ada = S.form.fotoAda.filter(f => S.form.fotoHapus.indexOf(f.id) < 0);
+  box.innerHTML = (ada.map(f => '<div class="foto-box">' + imgFoto(f) + '<button type="button" class="x" ' + on('hapusFotoForm', f.id, false) + '>✕</button></div>').join('') +
+    S.form.fotoBaru.map(f => '<div class="foto-box"><img class="foto" src="' + f.thumb + '" onclick="lihatFoto(this)"><button type="button" class="x" ' + on('hapusFotoForm', f.id, true) + '>✕</button></div>').join('')) || '<div class="muted">Belum ada foto</div>';
+  muatFotoLazy();
+}
+function hapusFotoForm(id, baru) {
+  if (baru) S.form.fotoBaru = S.form.fotoBaru.filter(f => f.id !== id);
+  else S.form.fotoHapus.push(id);
+  renderFotoForm();
+}
+function bacaFile(file) { return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = () => rej(r.error); r.readAsDataURL(file); }); }
+async function kompres(file) {
+  const url = await bacaFile(file);
+  const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error('Gambar tidak bisa dibaca')); i.src = url; });
+  const buat = (maks, q) => {
+    const s = Math.min(1, maks / Math.max(img.naturalWidth, img.naturalHeight));
+    const c = document.createElement('canvas');
+    c.width = Math.round(img.naturalWidth * s);
+    c.height = Math.round(img.naturalHeight * s);
+    c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+    return c.toDataURL('image/jpeg', q);
+  };
+  let hasil = buat(1280, 0.72);
+  if (hasil.length > 420000) hasil = buat(1024, 0.62);
+  return { data: hasil, thumb: buat(320, 0.6) };
+}
+async function tambahFoto(input) {
+  const file = input.files && input.files[0];
+  input.value = '';
+  if (!file) return;
+  if (jumlahFotoForm() >= 3) { toast('Maksimal 3 foto per inspeksi', 'warn'); return; }
+  try {
+    const r = await kompres(file);
+    S.form.fotoBaru.push({ id: uuid(), data: r.data, thumb: r.thumb });
+    renderFotoForm();
+  } catch (e) { toast('Foto gagal diproses: ' + e.message, 'error'); }
+}
+async function simpanInspeksi(e, id, tanamId) {
+  e.preventDefault();
+  const f = ambilForm(e.target), d = data(), t = d.by.Tanam[tanamId];
+  if (!t) { toast('Data tanam tidak ditemukan', 'error'); return; }
+  const extra = {};
+  $$('[data-extra]', e.target).forEach(el => { const v = String(el.value).trim(); if (v !== '') extra[el.dataset.extra] = el.type === 'number' ? Number(v) : v; });
+  const rec = {
+    id: id || uuid(), tanamId: t.id, kodeTanam: t.kode, tahap: f.tahap, tanggal: f.tanggal, isolasi: f.isolasi, offtype: angka(f.offtype),
+    hama: f.hama, tingkatHama: f.tingkatHama, kondisi: f.kondisi, hasil: f.hasil, catatan: f.catatan, extra: extra,
+    extraTeks: Object.keys(extra).map(k => k + ': ' + extra[k]).join('; '), lat: angka(f.lat), lng: angka(f.lng)
+  };
+  await simpanRec('Inspeksi', rec);
+  if (rec.lat !== null && (t.lat === null || t.lat === undefined || t.lat === '')) await simpanRec('Tanam', { id: t.id, lat: rec.lat, lng: rec.lng });
+  for (const fb of S.form.fotoBaru) {
+    const r = { id: fb.id, inspeksiId: rec.id, kodeTanam: t.kode, data: fb.data, thumb: fb.thumb, terkirim: false, dibuat: new Date().toISOString() };
+    S.fotoLokal[r.id] = r;
+    await Simpan.set('foto', r.id, r);
+  }
+  for (const hid of S.form.fotoHapus) {
+    const lok = S.fotoLokal[hid];
+    if (lok && !lok.terkirim) { delete S.fotoLokal[hid]; await Simpan.del('foto', hid); }
+    else { if (lok) { delete S.fotoLokal[hid]; await Simpan.del('foto', hid); } await hapusRec('Foto', hid); }
+  }
+  S.cache = null;
+  jadwalSinkron();
+  toastSimpan();
+  if (id) kembali(); else ganti('inspeksi', { id: rec.id });
+}
+async function hapusInspeksi(id) {
+  if (!await konfirmasi('Hapus data inspeksi ini beserta fotonya?', 'Hapus', true)) return;
+  const d = data();
+  for (const f of d.Foto.filter(x => x.inspeksiId === id)) {
+    const lok = S.fotoLokal[f.id];
+    if (lok) { delete S.fotoLokal[f.id]; await Simpan.del('foto', f.id); }
+    if (!lok || lok.terkirim) await hapusRec('Foto', f.id);
+  }
+  await hapusRec('Inspeksi', id);
+  toastSimpan();
+  kembali();
+}
+
+/* ====================== FORM: TAKSASI ====================== */
+LAYAR['form-taksasi'] = {
+  form: true, tab: 'petani',
+  judul(p) { return p.id ? 'Ubah Taksasi' : 'Taksasi Pra-Panen'; },
+  render(prm) {
+    const d = data(), x = prm.id ? d.by.Taksasi[prm.id] : null;
+    if (prm.id && !x) return kosong('Data tidak ditemukan.');
+    const t = d.by.Tanam[x ? x.tanamId : prm.tanamId];
+    if (!t) return kosong('Data tanam tidak ditemukan.');
+    const k = d.by.Komoditas[t.komoditasId] || {};
+    const v = x || {};
+    return '<form class="kartu" ' + onSubmit('simpanTaksasi', prm.id || '', t.id) + '>' +
+      '<div class="hitung"><b>' + esc(t.kode) + '</b> · ' + esc(namaPetani(t, d)) + ' · Target ' + fmtAngka(t.target) + ' kg</div>' +
+      fInput('Tanggal taksasi', 'tanggal', v.tanggal || hariIni(), 'type="date" required') +
+      fInput('Jumlah tanaman produktif', 'produktif', v.produktif, 'type="number" min="0" step="1" inputmode="numeric" oninput="hitungTaksasi()"') +
+      '<div class="grid2">' + fInput('Rata-rata buah/polong per tanaman', 'buah', v.buah, 'type="number" min="0" step="any" inputmode="decimal" oninput="hitungTaksasi()"') +
+      fInput('Benih bersih per buah/polong (gram)', 'gram', v.gram, 'type="number" min="0" step="any" inputmode="decimal" oninput="hitungTaksasi()"') + '</div>' +
+      '<div class="hitung" id="hasilTaksasi"></div>' +
+      fInput('Estimasi benih bersih (kg)', 'estimasi', v.estimasi, 'type="number" min="0" step="any" inputmode="decimal" oninput="this.dataset.manual=1;hitungTaksasi(true)"', 'Terisi otomatis dari hitungan di atas, boleh diubah manual.') +
+      fInput('Perkiraan tanggal panen', 'tglPanen', v.tglPanen || tambahHari(t.tglTanam, k.hstPanen), 'type="date"') +
+      fArea('Catatan', 'catatan', v.catatan) +
+      '<button class="btn penuh">Simpan Taksasi</button>' + (x ? '<button type="button" class="btn bahaya penuh" style="margin-top:10px" ' + on('hapusAnak', 'Taksasi', x.id) + '>🗑 Hapus</button>' : '') + '</form>';
+  },
+  setelah() { const f = $('form'); if (f && f.estimasi.value) f.estimasi.dataset.manual = '1'; hitungTaksasi(true); }
+};
+function hitungTaksasi(tanpaIsi) {
+  const f = $('form'), box = $('#hasilTaksasi');
+  if (!f || !box) return;
+  const t = data().by.Tanam[(S.stack[S.stack.length - 1].params || {}).tanamId] || data().by.Tanam[(data().by.Taksasi[(S.stack[S.stack.length - 1].params || {}).id] || {}).tanamId];
+  const p = angka(f.produktif.value), b = angka(f.buah.value), g = angka(f.gram.value);
+  let est = null;
+  if (p !== null && b !== null && g !== null) {
+    est = Math.round(p * b * g / 1000 * 10) / 10;
+    if (!tanpaIsi && !f.estimasi.dataset.manual) f.estimasi.value = est;
+  }
+  const nilai = angka(f.estimasi.value);
+  const target = t ? angka(t.target) : null;
+  box.innerHTML = (est !== null ? 'Hitungan: ' + fmtAngka(p, 0) + ' × ' + fmtAngka(b) + ' × ' + fmtAngka(g) + ' g ÷ 1000 = <b>' + fmtAngka(est) + ' kg</b>' : 'Isi tiga angka di atas untuk menghitung estimasi.') +
+    (nilai !== null && target ? '<br>Perkiraan capaian: <b>' + fmtAngka(nilai / target * 100, 0) + '%</b> dari target ' + fmtAngka(target) + ' kg' : '');
+}
+async function simpanTaksasi(e, id, tanamId) {
+  e.preventDefault();
+  const f = ambilForm(e.target), t = data().by.Tanam[tanamId];
+  const rec = { id: id || uuid(), tanamId: tanamId, kodeTanam: t ? t.kode : '', tanggal: f.tanggal, produktif: angka(f.produktif), buah: angka(f.buah), gram: angka(f.gram), estimasi: angka(f.estimasi), tglPanen: f.tglPanen, catatan: f.catatan };
+  if (rec.estimasi === null) { toast('Isi estimasi benih bersih', 'error'); return; }
+  await simpanRec('Taksasi', rec);
+  toastSimpan();
+  kembali();
+}
+async function hapusAnak(tabel, id) {
+  if (!await konfirmasi('Hapus data ini?', 'Hapus', true)) return;
+  await hapusRec(tabel, id);
+  toastSimpan();
+  kembali();
+}
+
+/* ====================== FORM: PANEN & HASIL AKHIR ====================== */
+LAYAR['form-panen'] = {
+  form: true, tab: 'petani',
+  judul(p) { return p.id ? 'Ubah Panen' : 'Catat Panen'; },
+  render(prm) {
+    const d = data(), x = prm.id ? d.by.Panen[prm.id] : null;
+    if (prm.id && !x) return kosong('Data tidak ditemukan.');
+    const t = d.by.Tanam[x ? x.tanamId : prm.tanamId];
+    if (!t) return kosong('Data tanam tidak ditemukan.');
+    const pan = d.Panen.filter(p => p.tanamId === t.id);
+    const ke = x ? x.panenKe : (pan.reduce((m, p) => Math.max(m, Number(p.panenKe) || 0), 0) + 1);
+    const v = x || {};
+    return '<form class="kartu" ' + onSubmit('simpanPanen', prm.id || '', t.id) + '>' +
+      '<div class="hitung"><b>' + esc(t.kode) + '</b> · ' + esc(namaPetani(t, d)) + (pan.length ? ' · sudah ' + pan.length + ' kali panen (' + fmtAngka(jumlah(pan.map(p => p.berat))) + ' kg)' : '') + '</div>' +
+      '<div class="grid2">' + fInput('Panen ke-', 'panenKe', ke, 'type="number" min="1" required inputmode="numeric"') + fInput('Tanggal panen', 'tanggal', v.tanggal || hariIni(), 'type="date" required') + '</div>' +
+      fInput('Berat hasil panen (kg)', 'berat', v.berat, 'type="number" min="0" step="any" inputmode="decimal" required', 'Berat buah/polong yang dipanen pada petikan ini.') +
+      fArea('Catatan', 'catatan', v.catatan) +
+      '<button class="btn penuh">Simpan Panen</button>' + (x ? '<button type="button" class="btn bahaya penuh" style="margin-top:10px" ' + on('hapusAnak', 'Panen', x.id) + '>🗑 Hapus</button>' : '') + '</form>';
+  }
+};
+async function simpanPanen(e, id, tanamId) {
+  e.preventDefault();
+  const f = ambilForm(e.target), t = data().by.Tanam[tanamId];
+  const rec = { id: id || uuid(), tanamId: tanamId, kodeTanam: t ? t.kode : '', panenKe: angka(f.panenKe), tanggal: f.tanggal, berat: angka(f.berat), catatan: f.catatan };
+  if (rec.berat === null) { toast('Isi berat hasil panen', 'error'); return; }
+  await simpanRec('Panen', rec);
+  toastSimpan();
+  kembali();
+}
+
+LAYAR['form-hasil'] = {
+  form: true, tab: 'petani', judul: 'Hasil Akhir',
+  render(prm) {
+    const d = data(), t = d.by.Tanam[prm.id];
+    if (!t) return kosong('Data tanam tidak ditemukan.');
+    const c = capaian(t, d);
+    return '<form class="kartu" ' + onSubmit('simpanHasil', t.id) + '>' +
+      '<div class="hitung"><b>' + esc(t.kode) + '</b> · ' + esc(namaPetani(t, d)) + '<br>Target: <b>' + fmtAngka(c.target) + ' kg</b> · Taksasi: ' + fmtAngka(c.est) + ' kg · Total panen: ' + fmtAngka(c.totalPanen) + ' kg</div>' +
+      fInput('Hasil benih bersih setelah proses (kg)', 'benihBersih', t.benihBersih, 'type="number" min="0" step="any" inputmode="decimal" required oninput="hitungHasil(' + esc(JSON.stringify(c.target)) + ')"', 'Setelah sortir dan proses.') +
+      fInput('Tanggal', 'tglProses', t.tglProses || hariIni(), 'type="date"') +
+      '<div class="hitung" id="hasilAkhir"></div>' +
+      '<label class="cek"><input type="checkbox" name="selesai" ' + (t.status !== 'Gagal' ? 'checked' : '') + '> Tandai tanam ini selesai</label>' +
+      '<button class="btn penuh">Simpan Hasil</button></form>';
+  },
+  setelah(prm) { const t = data().by.Tanam[prm.id]; if (t) hitungHasil(angka(t.target)); }
+};
+function hitungHasil(target) {
+  const f = $('form'), box = $('#hasilAkhir');
+  if (!f || !box) return;
+  const h = angka(f.benihBersih.value);
+  if (h === null || !target) { box.innerHTML = target ? 'Isi hasil untuk melihat capaian.' : 'Target belum diisi pada data tanam.'; return; }
+  const p = h / target * 100;
+  box.innerHTML = 'Capaian: <b>' + fmtAngka(p, 1) + '%</b> — ' + (p >= 100 ? '✅ Tercapai' : '⚠️ Belum tercapai (kurang ' + fmtAngka(target - h) + ' kg)');
+}
+async function simpanHasil(e, id) {
+  e.preventDefault();
+  const f = ambilForm(e.target), t = data().by.Tanam[id];
+  const rec = { id: id, benihBersih: angka(f.benihBersih), tglProses: f.tglProses };
+  if (f.selesai) rec.status = 'Selesai';
+  else if (t && t.status === 'Selesai') rec.status = 'Aktif';
+  await simpanRec('Tanam', rec);
+  toastSimpan();
+  kembali();
+}
+
+/* ====================== FORM: KOMODITAS ====================== */
+function barisTahap(s) {
+  return '<div class="editor-baris" data-tahap><input data-k="nama" placeholder="Nama tahap, mis. Inspeksi 1 – Vegetatif" value="' + esc(s.nama || '') + '"><input data-k="hst" type="number" min="0" inputmode="numeric" placeholder="HST" value="' + esc(s.hst === undefined ? '' : s.hst) + '"><button type="button" class="btn-hapus" onclick="this.parentNode.remove()" aria-label="Hapus">✕</button></div>';
+}
+function barisField(f) {
+  return '<div class="editor-field" data-field><div class="atas"><input data-k="label" placeholder="Nama kolom, mis. Jumlah buah jadi" value="' + esc(f.label || '') + '">' +
+    '<select data-k="tipe">' + [['angka', 'Angka'], ['teks', 'Teks'], ['pilihan', 'Pilihan']].map(o => '<option value="' + o[0] + '"' + ((f.tipe || 'angka') === o[0] ? ' selected' : '') + '>' + o[1] + '</option>').join('') + '</select>' +
+    '<button type="button" class="btn-hapus" onclick="this.closest(\'[data-field]\').remove()" aria-label="Hapus">✕</button></div>' +
+    '<input data-k="opsi" placeholder="Khusus tipe Pilihan: pisahkan dengan koma, mis. Baik, Cukup, Kurang" value="' + esc(f.opsi || '') + '"></div>';
+}
+LAYAR['form-komoditas'] = {
+  form: true, tab: 'pengaturan',
+  judul(p) { return p.id ? 'Ubah Komoditas' : 'Tambah Komoditas'; },
+  render(prm) {
+    const d = data(), k = prm.id ? d.by.Komoditas[prm.id] : null;
+    if (prm.id && !k) return kosong('Data tidak ditemukan.');
+    const x = k || { tahap: [{ nama: 'Inspeksi 1 – Vegetatif', hst: '' }, { nama: 'Inspeksi 2 – Berbunga', hst: '' }, { nama: 'Inspeksi 3 – Pra-Panen', hst: '' }], fields: [], aktif: true };
+    const dipakai = k ? d.Tanam.filter(t => t.komoditasId === k.id).length : 0;
+    return '<form class="kartu" ' + onSubmit('simpanKomoditas', prm.id || '') + '>' +
+      '<div class="grid2">' + fInput('Kode *', 'kode', x.kode, 'required maxlength="6" autocapitalize="characters" placeholder="mis. CBI"', 'Dipakai di kode tanam, mis. CBI-2026-001') + fInput('Nama komoditas *', 'nama', x.nama, 'required placeholder="mis. Cabai"') + '</div>' +
+      (dipakai ? '<div class="hint" style="margin:-6px 0 10px">Sudah dipakai ' + dipakai + ' data tanam. Mengubah kode tidak mengubah kode tanam yang sudah ada.</div>' : '') +
+      '<div class="sub">Tahap inspeksi & HST</div><div class="hint" style="margin-bottom:8px">HST = hari setelah tanam. Isi sesuai SOP perusahaan. Mengubah nama tahap tidak mengubah nama di inspeksi lama.</div>' +
+      '<div id="daftarTahap">' + (x.tahap || []).map(barisTahap).join('') + '</div>' +
+      '<button type="button" class="btn kecil dua" onclick="document.getElementById(\'daftarTahap\').insertAdjacentHTML(\'beforeend\', barisTahap({}))">+ Tambah tahap</button>' +
+      '<div style="height:12px"></div>' + fInput('HST perkiraan panen *', 'hstPanen', x.hstPanen, 'type="number" min="1" required inputmode="numeric"') +
+      '<div class="sub">Kolom tambahan di formulir inspeksi</div><div class="hint" style="margin-bottom:8px">Kolom khusus komoditas ini, mis. "Jumlah buah jadi" untuk semangka.</div>' +
+      '<div id="daftarField">' + (x.fields || []).map(barisField).join('') + '</div>' +
+      '<button type="button" class="btn kecil dua" onclick="document.getElementById(\'daftarField\').insertAdjacentHTML(\'beforeend\', barisField({}))">+ Tambah kolom</button>' +
+      '<div style="height:14px"></div><label class="cek"><input type="checkbox" name="aktif" ' + (x.aktif !== false ? 'checked' : '') + '> Komoditas aktif (muncul saat menambah tanam)</label>' +
+      '<button class="btn penuh">Simpan Komoditas</button>' +
+      (k ? '<button type="button" class="btn bahaya penuh" style="margin-top:10px" ' + on('hapusKomoditas', k.id) + '>🗑 Hapus komoditas</button>' : '') + '</form>';
+  }
+};
+async function simpanKomoditas(e, id) {
+  e.preventDefault();
+  const form = e.target, f = ambilForm(form), d = data();
+  const kode = String(f.kode || '').toUpperCase().replace(/\s/g, '');
+  if (!/^[A-Z0-9]{2,6}$/.test(kode)) { toast('Kode 2–6 huruf/angka tanpa spasi, mis. CBI', 'error'); return; }
+  if (d.Komoditas.some(k => k.id !== id && k.kode === kode)) { toast('Kode ' + kode + ' sudah dipakai', 'error'); return; }
+  const tahap = [];
+  for (const r of $$('[data-tahap]', form)) {
+    const nama = $('[data-k=nama]', r).value.trim(), hst = angka($('[data-k=hst]', r).value);
+    if (!nama && hst === null) continue;
+    if (!nama || hst === null) { toast('Setiap tahap harus punya nama dan HST', 'error'); return; }
+    tahap.push({ nama: nama, hst: hst });
+  }
+  const namaUnik = new Set(tahap.map(t => t.nama));
+  if (namaUnik.size !== tahap.length) { toast('Nama tahap tidak boleh sama', 'error'); return; }
+  tahap.sort((a, b) => a.hst - b.hst);
+  const fields = [];
+  for (const r of $$('[data-field]', form)) {
+    const label = $('[data-k=label]', r).value.trim();
+    if (!label) continue;
+    const tipe = $('[data-k=tipe]', r).value, opsi = $('[data-k=opsi]', r).value.trim();
+    if (tipe === 'pilihan' && !opsi) { toast('Kolom "' + label + '" bertipe Pilihan, isi pilihannya', 'error'); return; }
+    fields.push(tipe === 'pilihan' ? { label: label, tipe: tipe, opsi: opsi } : { label: label, tipe: tipe });
+  }
+  const hstPanen = angka(f.hstPanen);
+  if (!hstPanen) { toast('Isi HST perkiraan panen', 'error'); return; }
+  await simpanRec('Komoditas', { id: id || uuid(), kode: kode, nama: f.nama, tahap: tahap, hstPanen: hstPanen, fields: fields, aktif: !!f.aktif });
+  toastSimpan();
+  kembali();
+}
+async function hapusKomoditas(id) {
+  if (data().Tanam.some(t => t.komoditasId === id)) { toast('Komoditas ini sudah dipakai data tanam. Nonaktifkan saja (hilangkan centang "aktif").', 'warn', 7000); return; }
+  if (!await konfirmasi('Hapus komoditas ini?', 'Hapus', true)) return;
+  await hapusRec('Komoditas', id);
+  toastSimpan();
+  kembali();
+}
+
+/* ====================== PDF ====================== */
+const PDF_CSS = 'body{font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#111;margin:0}h1{font-size:18px;margin:0 0 2px;color:#1B5E20}h2{font-size:13px;margin:16px 0 6px;color:#1B5E20;border-bottom:1px solid #A5D6A7;padding-bottom:3px}h3{font-size:12px;margin:12px 0 4px}table{border-collapse:collapse;width:100%;margin-bottom:8px}th,td{border:1px solid #bbb;padding:4px 6px;text-align:left;vertical-align:top}th{background:#E8F5E9}.kanan{text-align:right}.muted{color:#666}.foto{width:220px;height:165px;margin:4px 6px 4px 0;border:1px solid #ccc}.ok{color:#1B5E20;font-weight:bold}.no{color:#C62828;font-weight:bold}';
+function bungkusPdf(judul, isi) {
+  return '<html><head><meta charset="utf-8"><style>' + PDF_CSS + '</style></head><body><h1>' + esc(judul) + '</h1><div class="muted">Dibuat ' + fmtTgl(hariIni()) + ' · Kerjaan Jeky</div>' + isi + '</body></html>';
+}
+function imgPdf(f) {
+  const lok = S.fotoLokal[f.id];
+  if (lok && lok.data) return '<img class="foto" src="' + lok.data + '">';
+  if (f.fileId) return '<img class="foto" src="drive:' + esc(f.fileId) + '">';
+  if (lok && lok.thumb) return '<img class="foto" src="' + lok.thumb + '">';
+  return '';
+}
+function tabelInfo(baris) { return '<table>' + baris.map(b => '<tr><th style="width:32%">' + esc(b[0]) + '</th><td>' + (b[2] ? b[1] : esc(b[1] === null || b[1] === undefined || b[1] === '' ? '-' : b[1])) + '</td></tr>').join('') + '</table>'; }
+function htmlInspeksiPdf(i, d) {
+  const ex = i.extra || {};
+  return tabelInfo([['Tahap', i.tahap], ['Tanggal', fmtTgl(i.tanggal)], ['Jarak isolasi', i.isolasi], ['Off-type dicabut', fmtAngka(i.offtype, 0)], ['Hama / penyakit', (i.hama || '-') + ' (' + (i.tingkatHama || '-') + ')'], ['Kondisi tanaman', i.kondisi]]
+    .concat(Object.keys(ex).map(k => [k, ex[k]]))
+    .concat([['Hasil inspeksi', i.hasil], ['Catatan & rekomendasi', i.catatan], ['Koordinat', i.lat !== null && i.lat !== undefined && i.lat !== '' ? fmtKoord(i.lat) + ', ' + fmtKoord(i.lng) : '-']]));
+}
+async function buatPdf(judul, html) {
+  const m = modal('<div class="h2">Membuat PDF…</div><p class="muted">Mohon tunggu. Pembuatan PDF butuh sinyal internet.</p>', true);
+  try {
+    const r = await panggil('apiPdf', S.token, judul, html);
+    m.isi('<div class="h2">PDF siap ✅</div><p class="muted">' + esc(r.nama) + ' tersimpan di Google Drive, folder “Kerjaan Jeky - Laporan PDF”. Dari sana bisa dibagikan ke WhatsApp.</p><div class="baris-btn" style="justify-content:flex-end"><button class="btn dua" onclick="tutupModal()">Tutup</button><a class="btn" href="' + esc(r.url) + '" target="_blank" onclick="setTimeout(tutupModal,300)">Buka PDF</a></div>');
+  } catch (e) {
+    m.isi('<div class="h2">PDF belum bisa dibuat</div><p>' + (e.offline ? 'Tidak ada sinyal. Coba lagi setelah ada sinyal.' : esc(e.message)) + '</p><div class="baris-btn" style="justify-content:flex-end"><button class="btn dua" onclick="tutupModal()">Tutup</button></div>');
+  }
+}
+function pdfInspeksi(id) {
+  const d = data(), i = d.by.Inspeksi[id];
+  if (!i) return;
+  const t = d.by.Tanam[i.tanamId] || {}, p = d.by.Petani[t.petaniId] || {};
+  const foto = d.Foto.filter(f => f.inspeksiId === id);
+  const isi = '<h2>Data tanam</h2>' + tabelInfo([['Kode tanam', t.kode], ['Petani', (p.nama || t.namaPetani || '-') + ' (' + (p.kode || t.kodePetani || '-') + ')'], ['Alamat', [p.desa, p.kecamatan, p.kabupaten].filter(Boolean).join(', ')], ['Komoditas / varietas', namaKom(t, d) + ' / ' + (t.varietas || '-')], ['Luas', fmtAngka(t.luas) + ' ha'], ['Tanggal tanam', fmtTgl(t.tglTanam)]]) +
+    '<h2>Hasil inspeksi</h2>' + htmlInspeksiPdf(i, d) +
+    (foto.length ? '<h2>Foto</h2><div>' + foto.map(imgPdf).join('') + '</div>' : '');
+  buatPdf('Inspeksi ' + (t.kode || '') + ' - ' + i.tahap + ' - ' + fmtTgl(i.tanggal), bungkusPdf('Laporan Inspeksi Lapangan', isi));
+}
+function pdfPetani(id) {
+  const d = data(), p = d.by.Petani[id];
+  if (!p) return;
+  const tanam = d.Tanam.filter(t => t.petaniId === id).sort((a, b) => String(a.tglTanam || '').localeCompare(String(b.tglTanam || '')));
+  let isi = '<h2>Data petani</h2>' + tabelInfo([['Kode', p.kode], ['Nama', p.nama], ['No. HP / WA', p.hp], ['Alamat', [p.desa, p.kecamatan, p.kabupaten].filter(Boolean).join(', ')], ['Status', p.status], ['Catatan', p.catatan]]);
+  isi += '<h2>Ringkasan tanam</h2>' + (tanam.length ? '<table><tr><th>Kode tanam</th><th>Komoditas</th><th>Tgl tanam</th><th class="kanan">Luas (ha)</th><th class="kanan">Target (kg)</th><th class="kanan">Benih bersih (kg)</th><th class="kanan">Capaian</th><th>Status</th></tr>' +
+    tanam.map(t => { const c = capaian(t, d); return '<tr><td>' + esc(t.kode) + '</td><td>' + esc(namaKom(t, d)) + '</td><td>' + fmtTgl(t.tglTanam) + '</td><td class="kanan">' + fmtAngka(t.luas) + '</td><td class="kanan">' + fmtAngka(c.target) + '</td><td class="kanan">' + fmtAngka(c.hasil) + '</td><td class="kanan">' + (c.pct !== null ? fmtAngka(c.pct, 0) + '%' : '-') + '</td><td>' + esc(t.status) + '</td></tr>'; }).join('') + '</table>' : '<p>Belum ada data tanam.</p>');
+  tanam.forEach(t => {
+    const ins = d.Inspeksi.filter(x => x.tanamId === t.id).sort((a, b) => String(a.tanggal).localeCompare(String(b.tanggal)));
+    const pan = d.Panen.filter(x => x.tanamId === t.id).sort((a, b) => (a.panenKe || 0) - (b.panenKe || 0));
+    const c = capaian(t, d);
+    isi += '<h2>' + esc(t.kode) + ' — ' + esc(namaKom(t, d)) + (t.varietas ? ' (' + esc(t.varietas) + ')' : '') + '</h2>' +
+      '<div>Tanam ' + fmtTgl(t.tglTanam) + ' · ' + fmtAngka(t.luas) + ' ha · Target ' + fmtAngka(c.target) + ' kg · Taksasi ' + fmtAngka(c.est) + ' kg · Total panen ' + fmtAngka(c.totalPanen) + ' kg · Benih bersih ' + fmtAngka(c.hasil) + ' kg</div>' +
+      '<h3>Inspeksi</h3>' + (ins.length ? '<table><tr><th>Tanggal</th><th>Tahap</th><th>Off-type</th><th>Hama/penyakit</th><th>Kondisi</th><th>Hasil</th><th>Catatan</th></tr>' + ins.map(i => '<tr><td>' + fmtTgl(i.tanggal) + '</td><td>' + esc(i.tahap) + '</td><td class="kanan">' + fmtAngka(i.offtype, 0) + '</td><td>' + esc((i.hama || '-') + ' (' + (i.tingkatHama || '-') + ')') + '</td><td>' + esc(i.kondisi) + '</td><td>' + esc(i.hasil) + '</td><td>' + esc(i.catatan || '') + '</td></tr>').join('') + '</table>' : '<p class="muted">Belum ada.</p>') +
+      '<h3>Panen</h3>' + (pan.length ? '<table><tr><th>Panen ke</th><th>Tanggal</th><th class="kanan">Berat (kg)</th><th>Catatan</th></tr>' + pan.map(x => '<tr><td>' + esc(x.panenKe) + '</td><td>' + fmtTgl(x.tanggal) + '</td><td class="kanan">' + fmtAngka(x.berat) + '</td><td>' + esc(x.catatan || '') + '</td></tr>').join('') + '</table>' : '<p class="muted">Belum ada.</p>');
+  });
+  buatPdf('Riwayat ' + p.kode + ' - ' + p.nama, bungkusPdf('Riwayat Petani Mitra: ' + p.nama, isi));
+}
+function pdfCapaian() {
+  const d = data(), L = dataLaporan(d);
+  const kf = S.filter.lapKom ? (d.by.Komoditas[S.filter.lapKom] || {}).nama : 'Semua komoditas';
+  const th = S.filter.lapTahun || 'Semua tahun';
+  let isi = '<div>Filter: ' + esc(kf) + ' · ' + esc(th) + '</div><h2>Ringkasan per komoditas</h2>' +
+    '<table><tr><th>Komoditas</th><th class="kanan">Jumlah tanam</th><th class="kanan">Total target (kg)</th><th class="kanan">Total taksasi (kg)</th><th class="kanan">Sudah ada hasil</th><th class="kanan">Benih bersih (kg)</th><th class="kanan">Capaian</th></tr>' +
+    L.ringkas.map(r => '<tr><td>' + esc(r.k.nama) + '</td><td class="kanan">' + r.n + '</td><td class="kanan">' + fmtAngka(r.target) + '</td><td class="kanan">' + fmtAngka(r.est) + '</td><td class="kanan">' + r.nSel + ' (' + r.tercapai + ' tercapai)</td><td class="kanan">' + fmtAngka(r.hasil) + '</td><td class="kanan">' + (r.pct !== null ? fmtAngka(r.pct, 1) + '%' : '-') + '</td></tr>').join('') + '</table>' +
+    '<p class="muted">Capaian dihitung dari tanam yang sudah ada hasil benih bersih: total hasil ÷ total target tanam tersebut.</p>' +
+    '<h2>Detail per kode tanam</h2><table><tr><th>Kode tanam</th><th>Petani</th><th>Varietas</th><th class="kanan">Luas (ha)</th><th class="kanan">Target (kg)</th><th class="kanan">Taksasi (kg)</th><th class="kanan">Benih bersih (kg)</th><th class="kanan">Capaian</th><th>Status</th></tr>' +
+    L.rows.map(r => '<tr><td>' + esc(r.t.kode) + '</td><td>' + esc(namaPetani(r.t, d)) + '</td><td>' + esc(r.t.varietas || '-') + '</td><td class="kanan">' + fmtAngka(r.t.luas) + '</td><td class="kanan">' + fmtAngka(r.c.target) + '</td><td class="kanan">' + fmtAngka(r.c.est) + '</td><td class="kanan">' + fmtAngka(r.c.hasil) + '</td><td class="kanan ' + (r.c.status === 'Tercapai' ? 'ok' : r.c.status === 'Belum tercapai' ? 'no' : '') + '">' + (r.c.pct !== null ? fmtAngka(r.c.pct, 0) + '%' : '-') + '</td><td>' + esc(r.t.status === 'Gagal' ? 'Gagal' : r.c.status) + '</td></tr>').join('') + '</table>';
+  buatPdf('Laporan Capaian Target - ' + kf + ' - ' + th, bungkusPdf('Laporan Capaian Target Benih', isi));
+}
+
+/* ====================== LOGIN & MULAI ====================== */
+function layarLogin(pesan) {
+  S.mulai = false;
+  document.body.innerHTML = '<div class="login"><form class="kotak" onsubmit="masuk(event)"><div class="logo">🌱</div><h1>Kerjaan Jeky</h1><div class="muted">Masukkan password untuk melanjutkan.</div>' +
+    (pesan ? '<div class="pesan">' + esc(pesan) + '</div>' : '<div style="height:14px"></div>') +
+    '<label class="f"><span>Password</span><input type="password" name="pw" required autocomplete="current-password"></label>' +
+    '<label class="cek"><input type="checkbox" onchange="this.form.pw.type=this.checked?\'text\':\'password\'"> Tampilkan password</label>' +
+    '<button class="btn penuh" id="btnMasuk">Masuk</button><div class="salah" id="loginInfo"></div>' +
+    (MODE_GAS ? '' : '<div class="muted" style="margin-top:14px;font-size:12.5px">Server: ' + esc(pendekUrl(S.server)) + ' · <span class="tautan" onclick="layarServer()">Ganti</span></div>') +
+    '</form></div><div class="toast-wrap" id="toasts"></div>';
+  setTimeout(() => { const i = $('[name=pw]'); if (i) i.focus(); }, 50);
+}
+function layarServer(pesan) {
+  S.mulai = false;
+  const n = jumlahMenunggu();
+  if (!pesan && n && S.server) pesan = 'Perhatian: masih ada ' + n + ' data/foto belum terkirim ke server sekarang. Kirim dulu sebelum mengganti server.';
+  document.body.innerHTML = '<div class="login"><form class="kotak" onsubmit="simpanServer(event)"><div class="logo">🌱</div><h1>Kerjaan Jeky</h1><div class="muted">Hubungkan aplikasi ke Google Sheets kamu.</div>' +
+    (pesan ? '<div class="pesan">' + esc(pesan) + '</div>' : '<div style="height:14px"></div>') +
+    '<label class="f"><span>Link server (URL aplikasi web)</span><textarea name="url" required rows="3" autocomplete="off" spellcheck="false" placeholder="https://script.google.com/macros/s/…/exec" style="min-height:0;font-size:14px">' + esc(S.server || '') + '</textarea>' +
+    '<div class="hint">Salin dari editor Apps Script: Terapkan → Kelola deployment → URL aplikasi web (berakhiran /exec).</div></label>' +
+    '<button class="btn penuh" id="btnServer">Hubungkan</button><div class="salah" id="serverInfo"></div>' +
+    (S.server && S.token ? '<div style="margin-top:12px;text-align:center"><span class="tautan" onclick="mulaiApp()">Batal</span></div>' : '') +
+    '</form></div><div class="toast-wrap" id="toasts"></div>';
+}
+async function simpanServer(e) {
+  e.preventDefault();
+  const url = e.target.url.value.trim().replace(/\s+/g, '');
+  const info = $('#serverInfo'), btn = $('#btnServer');
+  if (!/^https:\/\/script\.google\.com\/.+\/exec(\?.*)?$/.test(url)) { info.textContent = 'Link harus diawali https://script.google.com/ dan berakhiran /exec.'; return; }
+  btn.disabled = true;
+  btn.textContent = 'Menghubungkan…';
+  info.textContent = '';
+  try {
+    const r = prosesHasil(await panggilServer('apiInfo', [], url));
+    if (S.server !== url) {
+      S.token = null;
+      S.snap = null;
+      S.cache = null;
+      await Simpan.del('kv', 'token');
+      await Simpan.del('kv', 'snap');
+    }
+    S.server = url;
+    await Simpan.set('kv', 'server', url);
+    if (S.token) { mulaiApp(); sinkron(false); return; }
+    layarLogin(r.siap ? 'Server terhubung ✓ Silakan masuk.' : 'Server terhubung, tapi password belum diatur. Buka Google Sheets → menu Kerjaan Jeky → Atur / ganti password.');
+  } catch (err) {
+    info.textContent = err.offline
+      ? (navigator.onLine ? 'Tidak bisa terhubung. Cek link-nya, pastikan Code.gs versi terbaru sudah diterapkan sebagai "Versi baru", dan akses deployment "Siapa saja".' : 'Tidak ada sinyal. Coba lagi saat ada internet.')
+      : err.message;
+    btn.disabled = false;
+    btn.textContent = 'Hubungkan';
+  }
+}
+async function gantiServer() {
+  if (!await konfirmasi('Ganti link server? Kamu perlu login lagi setelahnya.', 'Ganti')) return;
+  layarServer();
+}
+async function masuk(e) {
+  e.preventDefault();
+  const btn = $('#btnMasuk'), info = $('#loginInfo');
+  btn.disabled = true;
+  btn.textContent = 'Memeriksa…';
+  info.textContent = '';
+  try {
+    const r = await panggil('apiLogin', e.target.pw.value);
+    S.token = r.token;
+    await Simpan.set('kv', 'token', r.token);
+    mulaiApp();
+    sinkron(false);
+  } catch (err) {
+    info.textContent = err.offline ? 'Tidak ada sinyal. Login butuh internet.' : err.message;
+    btn.disabled = false;
+    btn.textContent = 'Masuk';
+  }
+}
+function sesiHabis() {
+  if (!S.token) return;
+  S.token = null;
+  Simpan.del('kv', 'token');
+  layarLogin('Sesi login berakhir. Silakan masuk lagi — data yang belum terkirim tetap aman di HP ini.');
+}
+function mulaiApp() {
+  shell();
+  S.mulai = true;
+  S.stack = [{ nama: 'beranda', params: {} }];
+  tampil();
+}
+
+let intervalSiap = false;
+async function init() {
+  await Simpan.buka();
+  try {
+    S.token = (await Simpan.get('kv', 'token')) || null;
+    S.snap = (await Simpan.get('kv', 'snap')) || null;
+    S.antre = ((await Simpan.semua('antre')) || []).sort((a, b) => a.seq - b.seq);
+    ((await Simpan.semua('foto')) || []).forEach(f => { S.fotoLokal[f.id] = f; });
+  } catch (e) { console.error(e); }
+  if (!MODE_GAS) {
+    try { S.server = (await Simpan.get('kv', 'server')) || null; } catch (e) { S.server = null; }
+    daftarSW();
+  }
+  siapkanRiwayat();
+  if (!intervalSiap) {
+    intervalSiap = true;
+    setInterval(() => { if (S.token && jumlahMenunggu()) sinkron(false); }, 45000);
+    setInterval(() => { if (S.token) sinkron(false); }, 300000);
+    window.addEventListener('online', () => { S.online = true; sinkron(false); });
+    window.addEventListener('offline', () => { S.online = false; renderStatus(); });
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && S.token) sinkron(false); });
+  }
+  if (!MODE_GAS && !S.server) { layarServer(); return; }
+  if (!S.token) { layarLogin(); return; }
+  mulaiApp();
+  sinkron(false);
+}
+init();
+</script>
+</body>
+</html>
